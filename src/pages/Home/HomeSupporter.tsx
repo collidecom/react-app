@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import PostModel from '../../models/PostModel';
 import { Post } from '../../components/Post/Post';
+import Grid from '../../components/Grid/Grid';
+import { Paper } from '@material-ui/core';
 
 interface Props {
 
@@ -35,12 +37,22 @@ export default class HomeSupporter extends React.Component<Props> {
 
         return (
             <div>
-                {homeSupporterStore.postsArray.map((post: PostModel, index) =>
-                    <Post
-                        key={post.post_id}
-                        post={post}
-                    />   
-                )}
+                <Grid container spacing={24}>
+
+                    <Grid item xs={3}></Grid>
+                    <Grid item xs={6}>
+                        <Paper>
+                            {homeSupporterStore.postsArray.map((post: PostModel, index) =>
+                            <Post
+                                key={post.post_id}
+                                post={post}
+                            />   
+                            )}
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={3}></Grid>
+                </Grid>
+
             </div>
         );
     }
