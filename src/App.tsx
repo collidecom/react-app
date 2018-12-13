@@ -4,11 +4,12 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import RootStore from './stores/RootStore';
 import { inject, observer } from 'mobx-react';
-import Modal from './components/Modal/LoginModal';
+import LoginModal from './components/Modal/LoginModal';
 import { Switch, Route } from 'react-router';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import Home from './pages/Home/Home';
+import LandingPage from './pages/Home/LandingPage';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -37,9 +38,10 @@ class App extends Component<Props> {
       <div className="App">
         <NavBar/>
           <Switch>
-            <Route exact={true} path='/' component={Home} />
+            <Route exact={true} path='/' component={LandingPage} />
+            <Route exact={true} path='/app' component={Home} />
           </Switch>
-        <Modal/>
+        <LoginModal/>
       </div>
     );
   }

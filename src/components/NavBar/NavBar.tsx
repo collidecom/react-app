@@ -207,7 +207,9 @@ class NavBar extends React.Component<Props> {
           <Toolbar classes={{
             root:  classes.toolbarRoot
           }}>
-            <LogoButton>
+            <LogoButton
+              onClick={() => rootStore.goHome()}
+            >
               <img src='https://assets.collide.com/img/betalogo.svg'/>
             </LogoButton>
             <div className={classes.search}>
