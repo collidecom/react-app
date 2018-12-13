@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link as RouterLink, LinkProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledLink = styled(Link)`
+const Link = styled(RouterLink)`
     && {
         text-decoration: none;
         color: inherit;
     }
 `;
 
-export default StyledLink;
+export default Link;

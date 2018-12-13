@@ -1,23 +1,18 @@
 import * as React from 'react';
-import StyledLink from '../Link/Link';
 import styled from 'styled-components';
 
 interface Props {
-    creatorURL: string,
-    profileImageURL: string,
+    imageURL: string,
 }
 
 const Image = styled.img`
     width: 48px;
     height: 48px;
+    border-radius: 24px;
 `;
 
 const ProfileImage = (props: Props) => (
-    <StyledLink
-        to={props.creatorURL}
-    >
-        <Image src={props.profileImageURL}/>
-    </StyledLink>
+    <Image width={90} src={props.imageURL}/>
 );
 
 export default ProfileImage;
