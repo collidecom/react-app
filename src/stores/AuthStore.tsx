@@ -1,6 +1,6 @@
 import RootStore from './RootStore';
 import ApiClient from '../util/ApiClient';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 export default class AuthStore {
 
@@ -18,5 +18,22 @@ export default class AuthStore {
         }).catch((error) => {
             // not logged in, redirect to / ?
         });
+    }
+
+    @action logout = () => {
+        ApiClient.get('logout').then((response) => {
+            this.user = null;
+        }).catch((error) => {
+
+        });
+    }
+
+    @computed get isLoggedIn(): boolean {
+        return this.user && this.user.id > 0; 
+    }
+
+    @computed get isStar():boolean {
+
+        return this.user && this.user.account_type === "STAR";
     }
 }

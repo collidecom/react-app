@@ -145,6 +145,14 @@ class NavBar extends React.Component<Props> {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  logout = () => {
+
+    const { rootStore } = this.injected;
+    const { authStore } = rootStore;
+    authStore.logout();
+    this.handleMenuClose();
+  }
+
   render() {
 
     const { rootStore } = this.injected;
@@ -164,7 +172,7 @@ class NavBar extends React.Component<Props> {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.logout}>Logout</MenuItem>
       </Menu>
     );
 
@@ -208,14 +216,30 @@ class NavBar extends React.Component<Props> {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <Button
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
+              {authStore.isLoggedIn && !authStore.isStar &&
+                <p>
+                  {authStore.user.credits}
+                </p>
+              }
+
+              {authStore.isLoggedIn &&
+                <Button
+                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  {(authStore.user && authStore.user.display_name)}
+                </Button>
+              }
+              {!authStore.isLoggedIn &&
+                <Button
                 color="inherit"
-              >
-                {authStore.user && authStore.user.display_name}
-              </Button>
+                >
+                  Login
+                </Button>
+              }
+              
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
