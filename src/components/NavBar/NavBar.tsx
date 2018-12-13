@@ -237,7 +237,7 @@ class NavBar extends React.Component<Props> {
                   onClick={this.handleProfileMenuOpen}
                   color="inherit"
                 >
-                  {(authStore.user && authStore.user.display_name)}
+                  {(authStore.user && (authStore.user.display_name) || authStore.user.profile_name)}
                 </Button>
               }
               {!authStore.isLoggedIn &&

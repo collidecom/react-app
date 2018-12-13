@@ -9,6 +9,11 @@ export default class AuthStore {
     @observable user: any = {};
     @observable showLoginModal = false;
     
+    @observable loginFields: any = {
+        email: '',
+        password: '',
+    }
+
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
     }
@@ -18,6 +23,19 @@ export default class AuthStore {
             this.user = response.data.account;
         }).catch((error) => {
             // not logged in, redirect to / ?
+        });
+    }
+
+    @action login = () => {
+
+        ApiClient.get('login', {
+            email: this.loginFields.email,
+            password: this.loginFields.password
+        }).then(() => {
+            this.setShowLoginModal(false);
+            this.getAccount();
+        }).catch(() => {
+
         });
     }
 
@@ -40,5 +58,10 @@ export default class AuthStore {
 
     @action setShowLoginModal = (show: boolean) => {
         this.showLoginModal = show;
+    }
+
+    @action setLoginField = (name: string, value: string) => {
+
+        this.loginFields[name] = value;
     }
 }
