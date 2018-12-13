@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "mobx": "^4.0.0",
+    "mobx-react": "^5.4.3",
+    "mobx-react-router": "^4.0.5",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
