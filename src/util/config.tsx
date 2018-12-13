@@ -1,14 +1,30 @@
 let baseURL;
-let baseAPI;
+let isTestEnvironment = true;
 
-if (window.location.hostname === 'localhost') {
-    baseURL = 'https://dev1.collide.com/';
-    baseAPI = 'https://dev1.collide.com/api/v1/';
-}
-else {
-    baseURL = window.location.protocol + '//' + window.location.hostname + '/';
-    baseAPI = '/api/v1/';
+const apiVersion = 'v1';
+
+const hostname = window && window.location && window.location.hostname;
+
+switch (hostname) {
+
+    case 'www.collide.com':
+        baseURL = 'https://www.collide.com/';
+        isTestEnvironment = false;
+        break;
+
+    case 'stage.collide.com':
+        baseURL = 'https://stage.collide.com/';
+        break;
+
+    case 'qa.collide.com':
+        baseURL = 'https://qa.collide.com/';
+        break;
+
+    default:
+        baseURL = 'https://dev1.collide.com/';
+        break;
 }
 
-export const BASEAPI = baseAPI;
+export const BASEAPI = `${baseURL}api/${apiVersion}/`;
 export const BASEURL = baseURL;
+export const ISTESTENVIRONMENT = isTestEnvironment;

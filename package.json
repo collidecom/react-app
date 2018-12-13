@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.6.2",
     "axios": "^0.18.0",
+    "base-64": "^0.1.0",
     "mobx": "^4.0.0",
     "mobx-react": "^5.4.3",
     "mobx-react-router": "^4.0.5",
