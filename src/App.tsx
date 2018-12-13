@@ -1,12 +1,36 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar/NavBar';
+import RootStore from './stores/RootStore';
+import { inject, observer } from 'mobx-react';
 
-class App extends Component {
+interface Props {
+
+}
+
+interface InjectedProps {
+  rootStore: RootStore
+}
+@inject('rootStore')
+@observer
+class App extends Component<Props> {
+
+  get injected() {
+    return this.props as InjectedProps;
+  }
+
+  componentDidMount() {
+
+    const { rootStore } = this.injected;
+    rootStore.authStore.getAccount();
+
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <NavBar/>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -19,7 +43,6 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
       </div>
     );
   }
