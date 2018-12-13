@@ -128,6 +128,14 @@ class NavBar extends React.Component<Props> {
     mobileMoreAnchorEl: null,
   };
 
+  handleClickOpen = () => {
+    
+    const { rootStore } = this.injected;
+    const { authStore } = rootStore;
+    authStore.setShowLoginModal(true);
+
+  };
+
   handleProfileMenuOpen = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -234,7 +242,8 @@ class NavBar extends React.Component<Props> {
               }
               {!authStore.isLoggedIn &&
                 <Button
-                color="inherit"
+                  color="inherit"
+                  onClick={this.handleClickOpen}
                 >
                   Login
                 </Button>

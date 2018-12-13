@@ -7,6 +7,7 @@ export default class AuthStore {
     rootStore: RootStore;
 
     @observable user: any = {};
+    @observable showLoginModal = false;
     
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -35,5 +36,9 @@ export default class AuthStore {
     @computed get isStar():boolean {
 
         return this.user && this.user.account_type === "STAR";
+    }
+
+    @action setShowLoginModal = (show: boolean) => {
+        this.showLoginModal = show;
     }
 }

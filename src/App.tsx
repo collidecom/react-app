@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import RootStore from './stores/RootStore';
 import { inject, observer } from 'mobx-react';
+import Modal from './components/Modal/LoginModal';
 
 interface Props {
 
@@ -31,6 +32,7 @@ class App extends Component<Props> {
     return (
       <div className="App">
         <NavBar/>
+        <Modal/>
       </div>
     );
   }
