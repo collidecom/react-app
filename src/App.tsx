@@ -5,12 +5,16 @@ import NavBar from './components/NavBar/NavBar';
 import RootStore from './stores/RootStore';
 import { inject, observer } from 'mobx-react';
 import Modal from './components/Modal/LoginModal';
+import { Switch, Route } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface Props {
+import Home from './pages/Home/Home';
+
+interface Props extends RouteComponentProps<{}> {
 
 }
 
-interface InjectedProps {
+interface InjectedProps extends Props {
   rootStore: RootStore
 }
 @inject('rootStore')
@@ -32,10 +36,13 @@ class App extends Component<Props> {
     return (
       <div className="App">
         <NavBar/>
+          <Switch>
+            <Route exact={true} path='/' component={Home} />
+          </Switch>
         <Modal/>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
