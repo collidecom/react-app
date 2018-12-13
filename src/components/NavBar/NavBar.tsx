@@ -21,6 +21,7 @@ import { Button } from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
+import COLTextButton from '../Button/COLTextButton';
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
   && {
@@ -35,7 +36,7 @@ const styles = (theme: any) => createStyles({
   },
   toolbarRoot: {
     paddingLeft: '0px',
-    backgroundColor: 'gray'
+    backgroundColor: 'white'
   },
   grow: {
     flexGrow: 1,
@@ -243,12 +244,12 @@ class NavBar extends React.Component<Props> {
                 </Button>
               }
               {!authStore.isLoggedIn &&
-                <Button
-                  color="inherit"
+                <COLTextButton
+                  color='primary'
                   onClick={this.handleClickOpen}
                 >
-                  Login
-                </Button>
+                  Log in
+                </COLTextButton>
               }
               
             </div>
