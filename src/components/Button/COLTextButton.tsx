@@ -17,7 +17,7 @@ const ButtonBase: React.StatelessComponent<Props> = props => (
 
 const COLTextButton = styled(ButtonBase)`
   && { 
-    font-size: 16px;
+    font-size: 14px;
     font-family: MarkOT;
     min-height: 48px;
     text-transform: none;

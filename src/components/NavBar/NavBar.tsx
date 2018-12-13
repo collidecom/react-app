@@ -228,24 +228,22 @@ class NavBar extends React.Component<Props> {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               {authStore.isLoggedIn && !authStore.isStar &&
-                <p>
+                <COLTextButton>
                   {authStore.user.credits}
-                </p>
+                </COLTextButton>
               }
 
               {authStore.isLoggedIn &&
-                <Button
+                <COLTextButton
                   aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
-                  color="inherit"
                 >
                   {(authStore.user && (authStore.user.display_name) || authStore.user.profile_name)}
-                </Button>
+                </COLTextButton>
               }
               {!authStore.isLoggedIn &&
                 <COLTextButton
-                  color='primary'
                   onClick={this.handleClickOpen}
                 >
                   Log in
