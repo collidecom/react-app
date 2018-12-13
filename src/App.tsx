@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import RootStore from './stores/RootStore';
@@ -10,6 +9,8 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import Home from './pages/Home/Home';
 import LandingPage from './pages/Home/LandingPage';
+import { MuiThemeProvider } from '@material-ui/core';
+import { lightTheme } from './util/theme';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -35,13 +36,15 @@ class App extends Component<Props> {
 
   render() {
     return (
-      <div className="App">
-        <NavBar/>
-          <Switch>
-            <Route exact={true} path='/' component={LandingPage} />
-            <Route exact={true} path='/app' component={Home} />
-          </Switch>
-        <LoginModal/>
+      <div>
+          <MuiThemeProvider theme={lightTheme}>
+            <NavBar/>
+              <Switch>
+                <Route exact={true} path='/' component={LandingPage} />
+                <Route exact={true} path='/app' component={Home} />
+              </Switch>
+            <LoginModal/>
+          </MuiThemeProvider>
       </div>
     );
   }
