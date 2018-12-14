@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { media, orangeColor, premiumBlueColor } from '../../util/theme';
 import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
+const PlayIcon = require('../../img/icon-play-btn.svg') as string;
 
 interface Props {
     post: PostModel
@@ -45,6 +46,20 @@ const LockedMessageContent = styled.div`
 
 `;
 
+const PlayButton = styled.img`
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -mos-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    width: 100px;
+    height: 100px;
+`;
+
 const PostThumbnail: React.SFC<Props> = ({post, access}) => {
 
     if (post.post_type === PostType.TEXT) {
@@ -64,6 +79,7 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
                     <LazyLoad height={300} debounce={300} once={true}>
                         <img style={styles} src={post.post_media_thumb} draggable={false}/>
                     </LazyLoad>
+                    {post.post_type === PostType.VIDEO && <PlayButton src={PlayIcon}/>}
                 </Link>
                 ) : (
                     <LazyLoad height={300} debounce={300} once={true}>
