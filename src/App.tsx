@@ -39,7 +39,7 @@ class App extends Component<Props> {
       <div>
           <MuiThemeProvider theme={lightTheme}>
             <NavBar/>
-            <div style={{marginTop: '16px'}}>
+            <div style={{marginTop: '32px'}}>
               <Switch>
                 <Route exact={true} path='/' component={LandingPage} />
                 <Route exact={true} path='/app' component={Home} />
