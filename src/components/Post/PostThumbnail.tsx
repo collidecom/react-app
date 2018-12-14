@@ -59,11 +59,19 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
     }
     return (
         <div style={{position: 'relative', overflow: 'hidden'}}>
-            <Link to={url} style={{display: 'block'}}>
-                <LazyLoad height={300} debounce={300} once={true}>
-                    <img style={styles} src={post.post_media_thumb} draggable={false}/>
-                </LazyLoad>
-            </Link>
+            {access ? (
+                <Link to={url} style={{display: 'block'}}>
+                    <LazyLoad height={300} debounce={300} once={true}>
+                        <img style={styles} src={post.post_media_thumb} draggable={false}/>
+                    </LazyLoad>
+                </Link>
+                ) : (
+                    <LazyLoad height={300} debounce={300} once={true}>
+                        <img style={styles} src={post.post_media_thumb} draggable={false}/>
+                    </LazyLoad>
+                )
+            }
+
             {!access &&
             <LockedMessage>
                 <LockedMessageContent>
