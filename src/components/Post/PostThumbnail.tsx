@@ -58,8 +58,8 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
         styles.filter = 'blur(25px)';
     }
     return (
-        <div style={{position: 'relative'}}>
-            <Link to={url}>
+        <div style={{position: 'relative', overflow: 'hidden'}}>
+            <Link to={url} style={{display: 'block'}}>
                 <LazyLoad height={300} debounce={300} once={true}>
                     <img style={styles} src={post.post_media_thumb} draggable={false}/>
                 </LazyLoad>
@@ -70,7 +70,7 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
                     <Typography variant='h6' style={{color: 'white', fontFamily: 'MarkOT-Book'}}>Subscribe to {post.creator_profile_name} to unlock their 
                     <Typography variant='h6' style={{display: 'inline', color: premiumBlueColor, fontFamily: 'MarkOT-Book'}}> PREMIUM</Typography> Content!
                     </Typography>
-                    <COLPrimaryButton style={{backgroundColor: orangeColor}}>Support Levels</COLPrimaryButton>
+                    <COLPrimaryButton style={{margintop: '8px', backgroundColor: orangeColor}}>Support Levels</COLPrimaryButton>
                 </LockedMessageContent>
             </LockedMessage>
             }

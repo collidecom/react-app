@@ -15,8 +15,10 @@ export enum PostAccess {
 export default interface PostModel {
 
     post_id: number;
+
+    post_headline: string;
     post_text_content: string;
-    creator_profile_name: string;
+
     post_type: PostType;
     post_access: PostAccess;
     post_this_user_access: string;
@@ -27,6 +29,8 @@ export default interface PostModel {
     post_raw_date: number;
 
     star: StarModel;
+    creator_profile_name: string;
+
     post_media_content: MediaModel;
 
 }

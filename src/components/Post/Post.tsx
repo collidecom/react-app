@@ -39,6 +39,9 @@ export const Post: React.SFC<Props> = ({post, access}) => (
             post={post}
             access={access}
         />
+        <Link to={`single_video?v=${post.post_media_content.id}&p=${post.post_id}`}>
+            <Typography variant='h6' style={{marginTop: '16px'}}>{post.post_headline}</Typography>
+        </Link>
         <div style={{display: 'flex'}}>
             <PostDate
                 postDate={post.post_raw_date}
