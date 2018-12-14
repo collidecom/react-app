@@ -2,12 +2,13 @@ import RootStore from './RootStore';
 import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
 import UserModel, { AccountType } from '../models/UserModel';
+import { convertCreditsToDollars } from '../util/Credits';
 
 export default class AuthStore {
 
     rootStore: RootStore;
 
-    @observable user?: UserModel;
+    @observable user?: UserModel = undefined; 
     @observable showLoginModal = false;
     
     @observable loginFields: any = {
@@ -67,11 +68,11 @@ export default class AuthStore {
         return 0;
     }
 
-    @action credits(): number {
+    @action credits(): string {
         if (this.user) {
-            return this.user.credits;
+            return convertCreditsToDollars(this.user.credits);
         }
-        return 0;
+        return '';
     }
 
     @action setShowLoginModal = (show: boolean) => {

@@ -16,6 +16,7 @@ import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
 import COLTextButton from '../Button/COLTextButton';
+import Typography from '../Typography/Typography';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
@@ -225,7 +226,7 @@ class NavBar extends React.Component<Props> {
               {authStore.isLoggedIn && !authStore.isStar &&
                 <COLTextButton>
                   <img src={CreditsIcon} style={{marginRight: '8px'}}/>
-                  {authStore.credits}
+                  <Typography variant='body2'>{authStore.credits()}</Typography>                  
                 </COLTextButton>
               }
 
