@@ -23,10 +23,10 @@ export default class RootStore {
     @action goHome = () => {
 
         if (this.authStore.isLoggedIn) {
-            window.location.assign('/app');
+            this.routerStore.push('/app');
         }
         else {
-            window.location.assign('/');
+            this.routerStore.push('/');
         }
     }
 }
