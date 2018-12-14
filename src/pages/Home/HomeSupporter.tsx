@@ -5,7 +5,7 @@ import PostModel from '../../models/PostModel';
 import { Post } from '../../components/Post/Post';
 import Grid from '../../components/Grid/Grid';
 import { Paper, Divider, Hidden } from '@material-ui/core';
-
+const debounce = require('lodash.debounce');
 interface Props {
 
 }
@@ -28,7 +28,28 @@ export default class HomeSupporter extends React.Component<Props> {
         const { homeSupporterStore } = rootStore;
         homeSupporterStore.fetchInitialPosts();
 
+        window.addEventListener("scroll", this.handleScroll);
+
     }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll)
+    }
+
+    handleScroll = debounce(() => {
+
+        const d = document.documentElement;
+
+        const a = d.scrollTop;
+        const b = d.scrollHeight - window.innerHeight;
+        const scrollPercent = a / b;
+
+        if (scrollPercent > 0.8) {
+            const { rootStore } = this.injected;
+            const { homeSupporterStore } = rootStore;
+            homeSupporterStore.fetchPosts();
+        }
+    }, 1000)
 
     render() {
 
