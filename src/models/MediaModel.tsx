@@ -14,6 +14,8 @@ export default interface MediaModel {
     type: MediaType;
     duration: number;
 
+    purchased: boolean
+
     likes: number;
     views: number;
 

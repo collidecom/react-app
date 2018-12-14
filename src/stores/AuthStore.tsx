@@ -1,12 +1,13 @@
 import RootStore from './RootStore';
 import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
+import UserModel, { AccountType } from '../models/UserModel';
 
 export default class AuthStore {
 
     rootStore: RootStore;
 
-    @observable user: any = {};
+    @observable user?: UserModel;
     @observable showLoginModal = false;
     
     @observable loginFields: any = {
@@ -41,19 +42,36 @@ export default class AuthStore {
 
     @action logout = () => {
         ApiClient.get('logout').then((response) => {
-            this.user = null;
+            this.user = undefined;
         }).catch((error) => {
 
         });
     }
 
     @computed get isLoggedIn(): boolean {
-        return this.user && this.user.id > 0; 
+        if (this.user && this.user.id > 0) {
+            return true;
+        }
+        return false;
     }
 
     @computed get isStar():boolean {
 
-        return this.user && this.user.account_type === "STAR";
+        return this.isLoggedIn && this.user!.account_type === AccountType.STAR;        
+    }
+
+    @computed get userId():number {
+        if (this.user) {
+            return this.user.id;
+        }
+        return 0;
+    }
+
+    @action get credits(): number {
+        if (this.user) {
+            return this.user.credits;
+        }
+        return 0;
     }
 
     @action setShowLoginModal = (show: boolean) => {

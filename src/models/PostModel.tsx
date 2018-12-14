@@ -10,6 +10,7 @@ export enum PostType {
 export enum PostAccess {
     PUBLIC = 'PUBLIC',
     SUBSCRIBED = 'SUBSCRIBED',
+    PURCHASED = 'PURCHASED',
 }
 export default interface PostModel {
 
@@ -18,6 +19,8 @@ export default interface PostModel {
     creator_profile_name: string;
     post_type: PostType;
     post_access: PostAccess;
+    post_this_user_access: string;
+
     post_is_liked: boolean;
     post_likes: number;
     post_media_thumb: string;

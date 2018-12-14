@@ -225,7 +225,7 @@ class NavBar extends React.Component<Props> {
               {authStore.isLoggedIn && !authStore.isStar &&
                 <COLTextButton>
                   <img src={CreditsIcon} style={{marginRight: '8px'}}/>
-                  {authStore.user.credits}
+                  {authStore.credits}
                 </COLTextButton>
               }
 
@@ -235,7 +235,7 @@ class NavBar extends React.Component<Props> {
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
                 >
-                  {(authStore.user && (authStore.user.display_name) || authStore.user.profile_name)}
+                  {(authStore.user && (authStore.user.display_name || authStore.user!.profile_name))}
                 </COLTextButton>
               }
               {!authStore.isLoggedIn &&
