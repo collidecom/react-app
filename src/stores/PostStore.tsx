@@ -12,27 +12,29 @@ export default class PostStore {
         this.rootStore = rootStore;
     }
 
-    @action likePost = (post: PostModel): Promise<any> => {
+    @action likePost = async (post: PostModel): Promise<any> => {
 
         const postId = post.post_id;
         const like = !post.post_is_liked;
 
         this.isLiking = true;
+
+        let route;
         if (like) {
-            return ApiClient.get(`post/${postId}/like`).then(() => {
-                post.post_is_liked = true;
-                this.isLiking = false;
-            }).catch(() => {
-                this.isLiking = false;
-            });
+            route = 'like';
         }
         else {
-            return ApiClient.get(`post/${postId}/unlike`).then(() => {
-                post.post_is_liked = false;
-                this.isLiking = false;
-            }).catch(() => {
-                this.isLiking = false;
-            });;
+            route = 'unlike';
+        }
+
+        try {
+            const response = await ApiClient.get(`post/${postId}/${route}`);
+            post.post_is_liked = like;
+            post.post_likes = response.data.likes;
+            this.isLiking = false;
+        }
+        catch (e) {
+            this.isLiking = false;
         }
 
     }
