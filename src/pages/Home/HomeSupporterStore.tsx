@@ -18,7 +18,7 @@ export default class HomeSupporterStore {
         const params = {
             web: 1,
             offset: 0,
-            limit: 10   // TODO: get however many user previously fetched?
+            limit: 5   // TODO: get however many user previously fetched?
         };
     
         ApiClient.get('feed/posts', params).then((response) => {
@@ -30,7 +30,7 @@ export default class HomeSupporterStore {
         });
 
     }
-    
+
     @action fetchPosts = () => {
 
         const params = {

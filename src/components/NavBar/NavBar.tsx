@@ -209,7 +209,7 @@ class NavBar extends React.Component<Props> {
             >
               <img src='https://assets.collide.com/img/betalogo.svg'/>
             </LogoButton>
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -220,7 +220,7 @@ class NavBar extends React.Component<Props> {
                   input: classes.inputInput,
                 }}
               />
-            </div>
+            </div> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               {authStore.isLoggedIn && !authStore.isStar &&

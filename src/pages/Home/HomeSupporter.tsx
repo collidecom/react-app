@@ -36,16 +36,16 @@ export default class HomeSupporter extends React.Component<Props> {
         const { homeSupporterStore } = rootStore;
 
         return (
-            <div>
+            <div style={{maxWidth: '1200px', margin: 'auto'}}>
                 <Grid container spacing={24}>
 
-                    <Grid item xs={3}></Grid>
-                    <Grid item xs={6}>
+                    <Grid item md={9}>
                         <Paper>
                             {homeSupporterStore.postsArray.map((post: PostModel, index) =>
                             <div key={post.post_id}>
                                 <Post
                                     post={post}
+                                    access={rootStore.accessStore.accessMedia(post.star, post, post.post_media_content)}
                                 />
                                 <Divider/>
                             </div>
@@ -53,7 +53,11 @@ export default class HomeSupporter extends React.Component<Props> {
                             )}
                         </Paper>
                     </Grid>
-                    <Grid item xs={3}></Grid>
+                    <Grid item md={3}>
+                        <Paper>
+                        Currently Connecting
+                        </Paper>
+                    </Grid>
                 </Grid>
 
             </div>

@@ -19,8 +19,9 @@ const StyledLink = styled(Link)`
 
 interface Props {
     post: PostModel
+    access: boolean
 }
-export const Post: React.SFC<Props> = ({post}) => (
+export const Post: React.SFC<Props> = ({post, access}) => (
     <div style={{padding: '16px'}}>
         <StyledLink to={post.star.profile_name_url} style={{display: 'inline-flex', alignItems: 'center'}}>
             <ProfileImage
@@ -36,6 +37,7 @@ export const Post: React.SFC<Props> = ({post}) => (
         <br/>
         <PostThumbnail
             post={post}
+            access={access}
         />
         <div style={{display: 'flex'}}>
             <PostDate
