@@ -1,20 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
@@ -22,6 +16,7 @@ import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
 import COLTextButton from '../Button/COLTextButton';
+const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
   && {
@@ -229,6 +224,7 @@ class NavBar extends React.Component<Props> {
             <div className={classes.sectionDesktop}>
               {authStore.isLoggedIn && !authStore.isStar &&
                 <COLTextButton>
+                  <img src={CreditsIcon} style={{marginRight: '8px'}}/>
                   {authStore.user.credits}
                 </COLTextButton>
               }
