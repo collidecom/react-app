@@ -43,12 +43,11 @@ export default class HomeSupporter extends React.Component<Props> {
                     <Grid item xs={6}>
                         <Paper>
                             {homeSupporterStore.postsArray.map((post: PostModel, index) =>
-                            <div>
+                            <div key={post.post_id}>
                                 <Post
-                                    key={post.post_id}
                                     post={post}
                                 />
-                                <Divider key={post.post_id}/>
+                                <Divider/>
                             </div>
 
                             )}
