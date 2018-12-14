@@ -67,7 +67,7 @@ export default class AuthStore {
         return 0;
     }
 
-    @action get credits(): number {
+    @action credits(): number {
         if (this.user) {
             return this.user.credits;
         }
