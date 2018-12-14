@@ -36,7 +36,7 @@ export default class HomeSupporter extends React.Component<Props> {
         const { homeSupporterStore, postStore } = rootStore;
 
         return (
-            <div style={{maxWidth: '1200px', margin: 'auto'}}>
+            <div style={{maxWidth: '1008px', margin: 'auto'}}>
                 <Grid container spacing={24}>
 
                     <Grid item xs={12} md={9}>
