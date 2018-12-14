@@ -73,6 +73,7 @@ export default class HomeSupporter extends React.Component<Props> {
                             </div>
 
                             )}
+                            {homeSupporterStore.isFetching && <p>FETCHING MORE...</p>}
                         </Paper>
                     </Grid>
                     <Hidden mdDown>
