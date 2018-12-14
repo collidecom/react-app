@@ -25,6 +25,11 @@ export const lightTheme = createMuiTheme({
         fontFamily: 'MarkOT',
         useNextVariants: true,
     },
+    props: {
+        MuiButtonBase: {
+            disableRipple: true
+        }
+    }
 });
 
 export const darkTheme = createMuiTheme({
@@ -38,6 +43,11 @@ export const darkTheme = createMuiTheme({
         fontFamily: 'MarkOT',
         useNextVariants: true,
     },
+    props: {
+        MuiButtonBase: {
+            disableRipple: true
+        }
+    }
 });
 
 const {

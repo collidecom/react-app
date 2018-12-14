@@ -22,6 +22,9 @@ const COLTextButton = styled(ButtonBase)`
     min-height: 48px;
     text-transform: none;
     box-shadow: none;
+    &:hover {
+      background-color: transparent;
+    }
   }
 `;
 
