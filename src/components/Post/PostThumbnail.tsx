@@ -3,7 +3,7 @@ import PostModel, { PostType } from "../../models/PostModel";
 import Link from '../Link/Link';
 import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
-import { media } from '../../util/theme';
+import { media, orangeColor, premiumBlueColor } from '../../util/theme';
 import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
 
@@ -18,10 +18,11 @@ const LockedMessage = styled.div`
     top: 0;
     right: 0;
     width: 100%;
+    height: 100%;
 
-    background-color: red;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), #000000);
+
     ${media.tablet`
-        background-color: blue;
         width: 75%;
     `}
 `;
@@ -40,6 +41,7 @@ const LockedMessageContent = styled.div`
     -webkit-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+
 
 `;
 
@@ -65,10 +67,10 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
             {!access &&
             <LockedMessage>
                 <LockedMessageContent>
-                    <Typography variant='body2' style={{color: 'white'}}>Subscribe to ${post.creator_profile_name} to unlock their 
-                    <Typography variant='body2' style={{textTransform: 'uppercase'}}>Premium</Typography> Content!
+                    <Typography variant='h6' style={{color: 'white', fontFamily: 'MarkOT-Book'}}>Subscribe to {post.creator_profile_name} to unlock their 
+                    <Typography variant='h6' style={{display: 'inline', color: premiumBlueColor, fontFamily: 'MarkOT-Book'}}> PREMIUM</Typography> Content!
                     </Typography>
-                    <COLPrimaryButton style={{backgroundColor: 'orange'}}>Support Levels</COLPrimaryButton>
+                    <COLPrimaryButton style={{backgroundColor: orangeColor}}>Support Levels</COLPrimaryButton>
                 </LockedMessageContent>
             </LockedMessage>
             }

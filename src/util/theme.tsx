@@ -10,6 +10,7 @@ export const premiumBlueColor = '#35C1EC';
 export const COLlightGreenColor = '#E1F1E9';
 export const COLdarkGreenColor = '#2abb4f';
 export const errorRedColor = '#ed5040';
+export const orangeColor = '#ff6e5f';
 
 export const lightTheme = createMuiTheme({
     palette: {

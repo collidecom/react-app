@@ -13,6 +13,11 @@
   src: url('./fonts/MarkOT-Medium.otf');
 }
 
+@font-face {
+  font-family: "MarkOT-Book";
+  src: url('https://anima-uploads.s3.amazonaws.com/590a788ea97cdb000c9c8d17/5aa1a33a74333b000dfd3ba7/5aa1a33b13a361000b5c2508/fonts/MarkOT-Book.otf') format("opentype");
+}
+
 body {
   margin: 0;
   padding: 0;
