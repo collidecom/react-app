@@ -4,6 +4,7 @@ export const grayTextColor = '#aab2bd';
 export const grayBackgroundColor = '#F5F7FA';
 export const charcoalGrayColor = '#434a54';
 export const azulColor = '#217ce6';
+export const premiumBlueColor = '#35C1EC';
 export const COLlightGreenColor = '#E1F1E9';
 export const COLdarkGreenColor = '#2abb4f';
 export const errorRedColor = '#ed5040';

@@ -6,6 +6,7 @@ import Typography from '../Typography/Typography';
 import styled from 'styled-components';
 import { grayBackgroundColor, grayTextColor, charcoalGrayColor } from '../../util/theme';
 import COLTextButton from '../Button/COLTextButton';
+import PostAccessLabel from './PostAccessLabel';
 const LikedIcon = require('../../img/icon-like-dark.svg') as string;
 const LikeIcon = require('../../img/like-icon.svg') as string;
 
@@ -48,6 +49,19 @@ const PostThumbnail = (post: PostModel) => {
         <img style={{width: '100%', height: 'auto'}} src={post.post_media_thumb}/>
     );
 }
+
+const PostDate = (postDate: number) => {
+
+    const date = new Date(postDate * 1000);
+    const dateString = (((date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear()));
+
+    return (
+        <Typography variant='body2' style={{color: grayTextColor, flexGrow: 1}}>
+        {dateString}
+        </Typography>
+    );
+
+}
 interface Props {
     post: PostModel
 }
@@ -66,6 +80,12 @@ export const Post: React.SFC<Props> = ({post}) => (
         </StyledLink>
         <br/>
         {PostThumbnail(post)}
+        <div style={{display: 'flex'}}>
+            {PostDate(post.post_raw_date)}
+            <PostAccessLabel
+                postAccess={post.post_access}
+            />
+        </div>
         <div style={{display: 'inline-flex', alignItems: 'center'}}>
             {LikeComponent(post.post_is_liked)}
             <Typography variant='body2' style={{color: grayTextColor}}>
