@@ -67,9 +67,9 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
             {!access &&
             <LockedMessage>
                 <LockedMessageContent>
-                    <Typography variant='h6' style={{color: 'white', fontFamily: 'MarkOT-Book'}}>Subscribe to {post.creator_profile_name} to unlock their 
-                    <Typography variant='h6' style={{display: 'inline', color: premiumBlueColor, fontFamily: 'MarkOT-Book'}}> PREMIUM</Typography> Content!
-                    </Typography>
+                    <Typography variant='h6' style={{color: 'white', fontFamily: 'MarkOT-Book'}}>Subscribe to {post.creator_profile_name} to unlock their </Typography>
+                    <Typography variant='h6' style={{display: 'inline', color: premiumBlueColor, fontFamily: 'MarkOT-Book'}}> PREMIUM </Typography>
+                    <Typography variant='h6' style={{color: 'white', fontFamily: 'MarkOT-Book'}}>Content!</Typography>
                     <COLPrimaryButton style={{margintop: '8px', backgroundColor: orangeColor}}>Support Levels</COLPrimaryButton>
                 </LockedMessageContent>
             </LockedMessage>

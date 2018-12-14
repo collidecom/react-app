@@ -46,7 +46,7 @@ export default class HomeSupporter extends React.Component<Props> {
                                 <Post
                                     post={post}
                                     access={rootStore.accessStore.accessMedia(post.star, post, post.post_media_content)}
-                                    onLike={() => postStore.likePost(post.post_id)}
+                                    onLike={() => postStore.likePost(post)}
                                 />
                                 <Divider/>
                             </div>

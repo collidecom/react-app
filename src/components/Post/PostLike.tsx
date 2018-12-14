@@ -2,18 +2,20 @@ import * as React from 'react';
 import COLTextButton from '../Button/COLTextButton';
 import { charcoalGrayColor, grayTextColor } from '../../util/theme';
 import Typography from '../Typography/Typography';
+import { PostProps } from './Post';
 const LikedIcon = require('../../img/icon-like-dark.svg') as string;
 const LikeIcon = require('../../img/like-icon.svg') as string;
 
-interface Props {
-    liked: boolean,
-    onLike: () => void,
+
+interface PostLikeProps extends PostProps {
+    liked: boolean
 }
-const PostLike: React.SFC<Props> = ({liked, onLike}) => {
+const PostLike: React.SFC<PostLikeProps> = (props) => {
+    
     let icon: string;
     let label: string;
     let color: string;
-    if (liked) {
+    if (props.liked) {
         icon = LikedIcon;
         label = 'Liked'
         color = charcoalGrayColor;
@@ -25,7 +27,7 @@ const PostLike: React.SFC<Props> = ({liked, onLike}) => {
     }
 
     return (
-        <COLTextButton style={{paddingLeft: 0}} onClick={onLike}>
+        <COLTextButton style={{paddingLeft: 0}} onClick={props.onLike}>
             <img src={icon} style={{marginRight: '8px'}}/>
             <Typography variant='body2' style={{color: color}}>{label}</Typography>
         </COLTextButton>

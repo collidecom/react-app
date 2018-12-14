@@ -2,12 +2,13 @@
 import RootStore from '../../stores/RootStore';
 import { observable, action } from 'mobx';
 import ApiClient from '../../util/ApiClient';
+import PostModel from '../../models/PostModel';
 
 export default class HomeSupporterStore {
 
     rootStore: RootStore;
     
-    @observable postsArray = [];
+    @observable postsArray: PostModel[] = [];
     
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
