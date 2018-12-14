@@ -26,7 +26,7 @@ export default class HomeSupporter extends React.Component<Props> {
 
         const { rootStore } = this.injected;
         const { homeSupporterStore } = rootStore;
-        homeSupporterStore.fetchPosts();
+        homeSupporterStore.fetchInitialPosts();
 
     }
 

@@ -13,12 +13,30 @@ export default class HomeSupporterStore {
         this.rootStore = rootStore;
     }
 
-    @action fetchPosts = (limit?: number) => {
+    @action fetchInitialPosts = () => {
 
         const params = {
             web: 1,
             offset: 0,
-            limit: 5
+            limit: 10   // TODO: get however many user previously fetched?
+        };
+    
+        ApiClient.get('feed/posts', params).then((response) => {
+            const fetchedArray = response.data.favorites_posts;
+            this.postsArray = fetchedArray;
+
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
+    
+    @action fetchPosts = () => {
+
+        const params = {
+            web: 1,
+            offset: this.postsArray.length,
+            limit: 10
         };
     
         ApiClient.get('feed/posts', params).then((response) => {
