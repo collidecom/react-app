@@ -1,7 +1,9 @@
 import StarModel from "./StarModel";
 
-enum PostType {
-    text, video, image
+export enum PostType {
+    TEXT = 'TEXT',
+    VIDEO = 'VIDEO',
+    IMAGE = 'IMAGE',
 }
 export default interface PostModel {
 
@@ -11,6 +13,7 @@ export default interface PostModel {
     post_type: PostType;
     post_is_liked: boolean;
     post_likes: number;
+    post_media_thumb: string;
     star: StarModel;
 
 }

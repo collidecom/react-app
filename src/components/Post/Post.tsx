@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PostModel from '../../models/PostModel';
+import PostModel, { PostType } from '../../models/PostModel';
 import ProfileImage from '../Image/ProfileImage';
 import Link from '../Link/Link';
 import Typography from '../Typography/Typography';
@@ -39,6 +39,15 @@ const LikeComponent = (liked: boolean) => {
     );
 }
 
+const PostThumbnail = (post: PostModel) => {
+
+    if (post.post_type === PostType.TEXT) {
+        return null;
+    }
+    return (
+        <img style={{width: '100%', height: 'auto'}} src={post.post_media_thumb}/>
+    );
+}
 interface Props {
     post: PostModel
 }
@@ -56,6 +65,7 @@ export const Post: React.SFC<Props> = ({post}) => (
             </Typography>
         </StyledLink>
         <br/>
+        {PostThumbnail(post)}
         <div style={{display: 'inline-flex', alignItems: 'center'}}>
             {LikeComponent(post.post_is_liked)}
             <Typography variant='body2' style={{color: grayTextColor}}>
