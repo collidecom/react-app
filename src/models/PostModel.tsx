@@ -1,4 +1,5 @@
 import StarModel from "./StarModel";
+import MediaModel from "./MediaModel";
 
 export enum PostType {
     TEXT = 'TEXT',
@@ -23,5 +24,6 @@ export default interface PostModel {
     post_raw_date: number;
 
     star: StarModel;
+    post_media_content: MediaModel;
 
 }

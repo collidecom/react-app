@@ -22,10 +22,13 @@ const PostAccessLabel: React.SFC<Props> = ({postAccess}) => {
     }
     
     return (
-        <Typography variant='body2' style={{color: textColor, flexShrink: 0}}>
-        {postAccess === PostAccess.SUBSCRIBED && PremiumIcon}
-        {label}
-        </Typography>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+            {postAccess === PostAccess.SUBSCRIBED && <PremiumIcon style={{width: '16px', height: '16px', marginRight: '4px'}}/>}
+            <Typography variant='body2' style={{color: textColor, flexShrink: 0}}>
+            {label}
+            </Typography>
+        </div>
+
     );
 
 }
