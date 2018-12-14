@@ -4,7 +4,7 @@ import RootStore from '../../stores/RootStore';
 import PostModel from '../../models/PostModel';
 import { Post } from '../../components/Post/Post';
 import Grid from '../../components/Grid/Grid';
-import { Paper } from '@material-ui/core';
+import { Paper, Divider } from '@material-ui/core';
 
 interface Props {
 
@@ -43,10 +43,14 @@ export default class HomeSupporter extends React.Component<Props> {
                     <Grid item xs={6}>
                         <Paper>
                             {homeSupporterStore.postsArray.map((post: PostModel, index) =>
-                            <Post
-                                key={post.post_id}
-                                post={post}
-                            />   
+                            <div>
+                                <Post
+                                    key={post.post_id}
+                                    post={post}
+                                />
+                                <Divider key={post.post_id}/>
+                            </div>
+
                             )}
                         </Paper>
                     </Grid>

@@ -11,7 +11,7 @@ const Image = styled.img`
     border-radius: 24px;
 `;
 
-const ProfileImage = (props: Props) => (
+const ProfileImage: React.SFC<Props> = (props) => (
     <Image width={90} src={props.imageURL}/>
 );
 
