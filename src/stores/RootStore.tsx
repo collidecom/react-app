@@ -3,6 +3,7 @@ import { action } from 'mobx';
 import AuthStore from './AuthStore';
 import HomeSupporterStore from '../pages/Home/HomeSupporterStore';
 import AccessStore from './AccessStore';
+import PostStore from './PostStore';
 
 export default class RootStore {
 
@@ -10,6 +11,7 @@ export default class RootStore {
     authStore: AuthStore;
     homeSupporterStore: HomeSupporterStore;
     accessStore: AccessStore;
+    postStore: PostStore;
 
     constructor() {
 
@@ -17,6 +19,7 @@ export default class RootStore {
         this.authStore = new AuthStore(this);
         this.homeSupporterStore = new HomeSupporterStore(this);
         this.accessStore = new AccessStore(this);
+        this.postStore = new PostStore(this);
 
     }
 

@@ -6,9 +6,10 @@ const LikedIcon = require('../../img/icon-like-dark.svg') as string;
 const LikeIcon = require('../../img/like-icon.svg') as string;
 
 interface Props {
-    liked: boolean
+    liked: boolean,
+    onLike: () => void,
 }
-const PostLike: React.SFC<Props> = ({liked}) => {
+const PostLike: React.SFC<Props> = ({liked, onLike}) => {
     let icon: string;
     let label: string;
     let color: string;
@@ -24,7 +25,7 @@ const PostLike: React.SFC<Props> = ({liked}) => {
     }
 
     return (
-        <COLTextButton style={{paddingLeft: 0}}>
+        <COLTextButton style={{paddingLeft: 0}} onClick={onLike}>
             <img src={icon} style={{marginRight: '8px'}}/>
             <Typography variant='body2' style={{color: color}}>{label}</Typography>
         </COLTextButton>

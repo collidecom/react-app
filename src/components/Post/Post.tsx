@@ -20,8 +20,9 @@ const StyledLink = styled(Link)`
 interface Props {
     post: PostModel
     access: boolean
+    onLike: () => void,
 }
-export const Post: React.SFC<Props> = ({post, access}) => (
+export const Post: React.SFC<Props> = ({post, access, onLike}) => (
     <div style={{padding: '16px'}}>
         <StyledLink to={post.star.profile_name_url} style={{display: 'inline-flex', alignItems: 'center'}}>
             <ProfileImage
@@ -53,6 +54,7 @@ export const Post: React.SFC<Props> = ({post, access}) => (
         <div style={{display: 'inline-flex', alignItems: 'center'}}>
             <PostLike
                 liked={post.post_is_liked}
+                onLike={onLike}
             />
             <Typography variant='body2' style={{color: grayTextColor}}>
             {post.post_likes} {post.post_likes === 1 ? 'Like' : 'Likes'}
