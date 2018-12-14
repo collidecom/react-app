@@ -4,9 +4,10 @@ import ProfileImage from '../Image/ProfileImage';
 import Link from '../Link/Link';
 import Typography from '../Typography/Typography';
 import styled from 'styled-components';
-import { grayBackgroundColor, grayTextColor } from '../../util/theme';
+import { grayBackgroundColor, grayTextColor, charcoalGrayColor } from '../../util/theme';
 import COLTextButton from '../Button/COLTextButton';
 const LikedIcon = require('../../img/icon-like-dark.svg') as string;
+const LikeIcon = require('../../img/like-icon.svg') as string;
 
 
 const StyledLink = styled(Link)`
@@ -14,6 +15,30 @@ const StyledLink = styled(Link)`
         background-color: transparent;
     }
 `;
+
+const LikeComponent = (liked: boolean) => {
+    let icon: string;
+    let label: string;
+    let color: string;
+    if (liked) {
+        icon = LikedIcon;
+        label = 'Liked'
+        color = charcoalGrayColor;
+    }
+    else {
+        icon = LikeIcon;
+        label = 'Like'
+        color = grayTextColor;
+    }
+
+    return (
+        <COLTextButton style={{paddingLeft: 0}}>
+            <img src={icon} style={{marginRight: '8px'}}/>
+            <Typography variant='body2' style={{color: color}}>{label}</Typography>
+        </COLTextButton>
+    );
+}
+
 interface Props {
     post: PostModel
 }
@@ -32,11 +57,10 @@ export const Post: React.SFC<Props> = ({post}) => (
         </StyledLink>
         <br/>
         <div style={{display: 'inline-flex', alignItems: 'center'}}>
-            <COLTextButton style={{paddingLeft: 0}}>
-                <img src={LikedIcon} style={{marginRight: '8px'}}/>
-                Liked
-            </COLTextButton>
-            <Typography variant='body2' style={{color: grayTextColor}}>2 Likes</Typography>
+            {LikeComponent(post.post_is_liked)}
+            <Typography variant='body2' style={{color: grayTextColor}}>
+            {post.post_likes} {post.post_likes === 1 ? 'Like' : 'Likes'}
+            </Typography>
         </div>
     </div>
 );
