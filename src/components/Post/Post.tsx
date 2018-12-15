@@ -10,6 +10,7 @@ import PostDate from './PostDate';
 import PostThumbnail from './PostThumbnail';
 import PostLike from './PostLike';
 import { inject, observer } from 'mobx-react';
+import StarModel from '../../models/StarModel';
 
 
 const StyledLink = styled(Link)`
@@ -20,18 +21,19 @@ const StyledLink = styled(Link)`
 
 export interface PostProps {
     post: PostModel
+    star: StarModel
     access: boolean
-    onLike: () => void,
+    onLike: () => void
 }
 export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) => {
 
-    const { post, access } = props;
+    const { post, star, access } = props;
     
     return (
         <div style={{ padding: '16px' }}>
-            <StyledLink to={post.star.profile_name_url} style={{ display: 'inline-flex', alignItems: 'center' }}>
+            <StyledLink to={star.profile_name_url} style={{ display: 'inline-flex', alignItems: 'center' }}>
                 <ProfileImage
-                    imageURL={post.star.profile_image}
+                    imageURL={star.profile_image}
                 />
                 <Typography
                     variant='h6'
@@ -46,7 +48,7 @@ export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) =
                 access={access}
             />
             <Link to={`single_video?v=${post.post_media_content.id}&p=${post.post_id}`}>
-                <Typography variant='h6' style={{ marginTop: '16px', display: 'inline' }}>{post.post_headline}</Typography>
+                <Typography variant='h6' style={{ marginTop: '16px', display: 'inline', wordWrap: 'break-word' }}>{post.post_headline}</Typography>
             </Link>
             <div style={{ display: 'flex' }}>
                 <PostDate

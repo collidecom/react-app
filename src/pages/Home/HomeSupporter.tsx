@@ -66,6 +66,7 @@ export default class HomeSupporter extends React.Component<Props> {
                             <div key={post.post_id}>
                                 <Post
                                     post={post}
+                                    star={post.star}
                                     access={rootStore.accessStore.accessMedia(post.star, post, post.post_media_content)}
                                     onLike={() => postStore.likePost(post)}
                                 />
