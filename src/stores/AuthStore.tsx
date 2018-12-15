@@ -8,6 +8,7 @@ export default class AuthStore {
 
     rootStore: RootStore;
 
+    @observable isLoadingAccount = false;
     @observable user?: UserModel = undefined; 
     @observable showLoginModal = false;
     
@@ -21,10 +22,13 @@ export default class AuthStore {
     }
 
     @action getAccount = () => {
+        this.isLoadingAccount = true;
         ApiClient.get('account').then((response) => {
             this.user = response.data.account;
+            this.isLoadingAccount = false;
         }).catch((error) => {
             // not logged in, redirect to / ?
+            this.isLoadingAccount = false;
         });
     }
 

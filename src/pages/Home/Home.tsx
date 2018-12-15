@@ -27,8 +27,13 @@ export default class Home extends React.Component<Props> {
 
         return (
             <div>
-                {!authStore.isStar && <HomeSupporter/>}
-                {authStore.isStar && <HomeCreator/>}
+                {!authStore.isLoadingAccount &&
+                    <div>
+                        {!authStore.isStar && <HomeSupporter/>}
+                        {authStore.isStar && <HomeCreator/>}
+                    </div>
+                }
+
             </div>
         );
     }
