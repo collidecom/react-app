@@ -11,6 +11,7 @@ import ProfileImage from '../../components/Image/ProfileImage';
 import COLPrimaryButton from '../../components/Button/COLPrimaryButton';
 import { charcoalGrayColor, grayBackgroundColor } from '../../util/theme';
 import Typography from '../../components/Typography/Typography';
+import CreatorLinkPaper, { GenerateLinkType } from '../../components/Paper/CreatorLinkPaper';
 const debounce = require('lodash.debounce');
 
 interface Props {
@@ -82,26 +83,34 @@ export default class HomeCreator extends React.Component<Props> {
 
                 {star &&
                     <Grid container spacing={24}>
-
                         <Hidden mdDown>
                             <Grid item md={3}>
-                                <Paper style={{ padding: '16px', textAlign: 'center' }}>
+                                <Paper style={{ textAlign: 'center' }}>
                                     <Link to={star.profile_name_url} style={{ display: 'block' }}>
                                         <ProfileImage src={star.profile_image} width='104px' height='104px' />
                                     </Link>
-                                    <Typography variant='h6' style={{fontWeight: 500}}>
-                                    {star.profile_name}
+                                    <Typography variant='h6' style={{ fontWeight: 500 }}>
+                                        {star.profile_name}
                                     </Typography>
-                                    <Link to={star.profile_name_url}>                                                                        
-                                        <COLPrimaryButton style={{color: charcoalGrayColor, backgroundColor: grayBackgroundColor, margin: '16px 0', display: 'block'}}>
-                                        View My page
+                                    <Link to={star.profile_name_url}>
+                                        <COLPrimaryButton style={{ color: charcoalGrayColor, backgroundColor: grayBackgroundColor, margin: '16px 0', display: 'block' }}>
+                                            View My page
                                         </COLPrimaryButton>
                                     </Link>
 
                                     <UnderlinedLink to="https://collide.zendesk.com/hc/en-us/articles/360020839031-Create-a-Site-That-Your-Followers-NEED-to-Subscribe-to">
-                                    Success Hacks
+                                        Success Hacks
                                     </UnderlinedLink>
                                 </Paper>
+                                <CreatorLinkPaper
+                                    type={GenerateLinkType.SHARE}
+                                    url={star.profile_name_url}
+                                />
+                                <CreatorLinkPaper
+                                    type={GenerateLinkType.REFERRAL}
+                                    url={star.referral_url}
+                                />
+
                             </Grid>
                         </Hidden>
                         <Grid item xs={12} md={6}>

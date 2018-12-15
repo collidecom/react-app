@@ -4,6 +4,7 @@ import { ThemedStyledComponentsModule } from "styled-components";
 
 export const grayTextColor = '#aab2bd';
 export const grayBackgroundColor = '#F5F7FA';
+export const grayBackgroundButtonColor = '#ccd1d9';
 export const charcoalGrayColor = '#434a54';
 export const azulColor = '#217ce6';
 export const premiumBlueColor = '#35C1EC';
@@ -23,6 +24,7 @@ export const lightTheme = createMuiTheme({
     },
     typography: {
         fontFamily: 'MarkOT',
+        fontWeightMedium: 500,
         useNextVariants: true,
     },
     props: {
@@ -41,6 +43,7 @@ export const darkTheme = createMuiTheme({
     },
     typography: {
         fontFamily: 'MarkOT',
+        fontWeightMedium: 600,
         useNextVariants: true,
     },
     props: {

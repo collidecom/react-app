@@ -5,6 +5,7 @@ import { PaperProps } from '@material-ui/core/Paper';
 
 const Paper = styled(MuiPaper as React.SFC<PaperProps>)`
     && {
+        padding: 16px;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
     }
 `;

@@ -7,6 +7,8 @@ export default interface StarModel {
     profile_name_url: string;
     profile_image: string;
 
+    referral_url: string;
+
     subscription: SubscriptionModel;
 
     library_purchased: [];
