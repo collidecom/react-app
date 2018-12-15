@@ -1,18 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-    imageURL: string,
+interface Props extends React.HTMLProps<HTMLImageElement> {
+    src: string
 }
 
-const Image = styled.img`
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-`;
-
 const ProfileImage: React.SFC<Props> = (props) => (
-    <Image width={90} src={props.imageURL}/>
+    <img
+        width={props.width || '48px'}
+        height={props.height || '48px'}
+        style={{ borderRadius: '50%' }}
+        src={props.src}
+    />
 );
 
 export default ProfileImage;

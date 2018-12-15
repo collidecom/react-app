@@ -33,7 +33,7 @@ export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) =
         <div style={{ padding: '16px' }}>
             <StyledLink to={star.profile_name_url} style={{ display: 'inline-flex', alignItems: 'center' }}>
                 <ProfileImage
-                    imageURL={star.profile_image}
+                    src={star.profile_image}
                 />
                 <Typography
                     variant='h6'

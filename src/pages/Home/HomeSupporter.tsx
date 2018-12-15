@@ -4,7 +4,8 @@ import RootStore from '../../stores/RootStore';
 import PostModel from '../../models/PostModel';
 import { Post } from '../../components/Post/Post';
 import Grid from '../../components/Grid/Grid';
-import { Paper, Divider, Hidden } from '@material-ui/core';
+import { Divider, Hidden } from '@material-ui/core';
+import Paper from '../../components/Paper/Paper';
 const debounce = require('lodash.debounce');
 interface Props {
 
