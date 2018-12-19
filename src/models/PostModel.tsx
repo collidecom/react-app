@@ -6,6 +6,7 @@ export enum PostType {
     VIDEO = 'VIDEO',
     IMAGE = 'IMAGE',
     AUDIO = 'AUDIO',
+    PDF = 'PDF',
 }
 
 export enum PostAccess {
