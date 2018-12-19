@@ -50,6 +50,15 @@ code {
     height: 289px;
   }
 }
+
+.audio-wrapper {
+
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  /* width: 100%; */
+}
 /* @media (min-width: 768px) {
   .player-wrapper {
     width: 400px;

@@ -26,7 +26,14 @@ export default class FloatingAudio extends React.Component<Props> {
 
         const url = 'http://www.ffmages.com/ffxiii/ost/disc-4/21-kimi-ga-iru-kara-long-version.mp3';
         return (
-            <ReactPlayer url={url} playing controls />
+            <div className='audio-wrapper'>
+                <ReactPlayer
+                url={url}
+                playing
+                controls
+                width='100%'
+                />
+            </div>
         );
     }
 }
