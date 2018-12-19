@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { media, orangeColor, premiumBlueColor } from '../../util/theme';
 import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
+import { thumbnailForMedia } from '../../models/MediaModel';
 const PlayIcon = require('../../img/icon-play-btn.svg') as string;
 
 interface Props {
@@ -72,18 +73,19 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
     if (!access) {
         styles.filter = 'blur(25px)';
     }
+    const thumbnailUrl = thumbnailForMedia(post.post_media_content);
     return (
         <div style={{position: 'relative', overflow: 'hidden'}}>
             {access ? (
                     <div>
                         <LazyLoad height={300} debounce={300} once={true}>
-                            <img style={styles} src={post.post_media_thumb} draggable={false}/>
+                            <img style={styles} src={thumbnailUrl} draggable={false}/>
                         </LazyLoad>
                         {post.post_type === PostType.VIDEO && <PlayButton src={PlayIcon}/>}
                     </div>
                 ) : (
                     <LazyLoad height={300} debounce={300} once={true}>
-                        <img style={styles} src={post.post_media_thumb} draggable={false}/>
+                        <img style={styles} src={thumbnailUrl} draggable={false}/>
                     </LazyLoad>
                 )
             }
