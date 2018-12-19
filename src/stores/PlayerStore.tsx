@@ -24,6 +24,10 @@ export default class PlayerStore {
         this.media = media
     }
 
+    @action clearMedia = () => {
+        this.media = undefined;
+    }
+
     @computed get playerType(): PlayerType {
 
         let playerType = PlayerType.NONE;
@@ -42,5 +46,23 @@ export default class PlayerStore {
         }
 
         return playerType;
+    }
+
+    @computed get mediaWidth(): number {
+        
+        if (this.media && this.media.items) {
+            return this.media.items[0].width;
+        }
+
+        return 200;
+    }
+
+    @computed get mediaHeight(): number {
+        
+        if (this.media && this.media.items) {
+            return this.media.items[0].height;
+        }
+
+        return 200;
     }
 }

@@ -27,6 +27,8 @@ interface Library {
     id: number
     mime: string
     type: PostType
+    width: number
+    height:  number
     download_url: string
 }
 
