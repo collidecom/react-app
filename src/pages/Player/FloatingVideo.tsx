@@ -31,6 +31,9 @@ export default class FloatingVideo extends React.Component<Props> {
         const { rootStore } = this.injected;
         const { authStore, playerStore } = rootStore;
         const { media } = playerStore;
+
+        const width = Math.min(playerStore.mediaWidth, 400);
+        const height = Math.min(playerStore.mediaHeight, 300);
         return (
             <div
                 className='player-wrapper'
@@ -42,8 +45,8 @@ export default class FloatingVideo extends React.Component<Props> {
                 // className='react-player'
                 playing
                 controls
-                width={playerStore.mediaWidth}
-                height={playerStore.mediaHeight}
+                width={width}
+                height={height}
                 />
                 {this.state.showClose &&
                     <IconButton
