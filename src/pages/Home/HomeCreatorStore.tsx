@@ -2,7 +2,7 @@
 import RootStore from '../../stores/RootStore';
 import { observable, action } from 'mobx';
 import ApiClient from '../../util/ApiClient';
-import PostModel from '../../models/PostModel';
+import PostModel, { filterUnprocessedPosts } from '../../models/PostModel';
 import StarModel from '../../models/StarModel';
 
 export default class HomeCreatorStore {
@@ -43,7 +43,8 @@ export default class HomeCreatorStore {
         }
         ApiClient.get(`star/${starId}/posts`, params).then((response) => {
             const fetchedArray = response.data;
-            this.postsArray = fetchedArray;
+            const filteredArray = filterUnprocessedPosts(fetchedArray);
+            this.postsArray = filteredArray;
 
         }).catch((error) => {
             console.log(error);

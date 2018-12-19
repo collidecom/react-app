@@ -2,7 +2,7 @@
 import RootStore from '../../stores/RootStore';
 import { observable, action } from 'mobx';
 import ApiClient from '../../util/ApiClient';
-import PostModel from '../../models/PostModel';
+import PostModel, { filterUnprocessedPosts } from '../../models/PostModel';
 
 export default class HomeSupporterStore {
 
@@ -25,7 +25,8 @@ export default class HomeSupporterStore {
     
         ApiClient.get('feed/posts', params).then((response) => {
             const fetchedArray = response.data.favorites_posts;
-            this.postsArray = fetchedArray;
+            const filteredArray = filterUnprocessedPosts(fetchedArray);
+            this.postsArray = filteredArray;
 
         }).catch((error) => {
             console.log(error);

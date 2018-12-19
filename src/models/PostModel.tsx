@@ -36,3 +36,17 @@ export default interface PostModel {
     post_media_content: MediaModel;
 
 }
+
+export function filterUnprocessedPosts(postsArray: PostModel[]): PostModel[] {
+    
+    return postsArray.filter((post: PostModel) => {
+
+        if (post.post_media_content) {
+            // i'm just listing all indicators that a media is still being processed by the server
+            if (post.post_media_thumb.includes('10x10') || !post.post_type) {
+                return false;
+            }
+        }
+        return true;
+    });
+}
