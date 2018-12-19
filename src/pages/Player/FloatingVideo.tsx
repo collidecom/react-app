@@ -32,8 +32,9 @@ export default class FloatingVideo extends React.Component<Props> {
         const { authStore, playerStore } = rootStore;
         const { media } = playerStore;
 
+        const aspectRatio = playerStore.mediaWidth / playerStore.mediaHeight;
         const width = Math.min(playerStore.mediaWidth, 400);
-        const height = Math.min(playerStore.mediaHeight, 300);
+        const height = width / aspectRatio;
         return (
             <div
                 className='player-wrapper'
