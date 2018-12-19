@@ -11,6 +11,8 @@ import PostThumbnail from './PostThumbnail';
 import PostLike from './PostLike';
 import { inject, observer } from 'mobx-react';
 import StarModel from '../../models/StarModel';
+import COLTextButton from '../Button/COLTextButton';
+import ApiClient from '../../util/ApiClient';
 
 
 const StyledLink = styled(Link)`
@@ -27,8 +29,10 @@ export interface PostProps {
 }
 export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) => {
 
-    const { post, star, access } = props;
+    const { post, star, access, rootStore } = props;
     
+    const { mediaStore } = rootStore;
+
     return (
         <div style={{ padding: '16px' }}>
             <StyledLink to={star.profile_name_url} style={{ display: 'inline-flex', alignItems: 'center' }}>
@@ -43,13 +47,29 @@ export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) =
                 </Typography>
             </StyledLink>
             <br />
+            <COLTextButton
+                onClick={() => {
+                    mediaStore.getMedia(post.post_media_content.id);
+                    // ApiClient.get(`media/${post.post_media_content.id}`).then((media) => {
+                    //     rootStore.playerStore.setMedia(media);
+                    // })
+                }}
+            >
+
             <PostThumbnail
                 post={post}
                 access={access}
             />
-            <Link to={`single_video?v=${post.post_media_content.id}&p=${post.post_id}`}>
+            </COLTextButton>
+            {/* <Link to={`single_video?v=${post.post_media_content.id}&p=${post.post_id}`}> */}
+            <COLTextButton
+                onClick={() => {
+                    console.log(rootStore.authStore.user);
+                }}
+            >
                 <Typography variant='h6' style={{ marginTop: '16px', display: 'inline', wordWrap: 'break-word' }}>{post.post_headline}</Typography>
-            </Link>
+            </COLTextButton>
+            {/* </Link> */}
             <div style={{ display: 'flex' }}>
                 <PostDate
                     postDate={post.post_raw_date}

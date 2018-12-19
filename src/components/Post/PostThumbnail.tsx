@@ -75,12 +75,12 @@ const PostThumbnail: React.SFC<Props> = ({post, access}) => {
     return (
         <div style={{position: 'relative', overflow: 'hidden'}}>
             {access ? (
-                <Link to={url} style={{display: 'block'}}>
-                    <LazyLoad height={300} debounce={300} once={true}>
-                        <img style={styles} src={post.post_media_thumb} draggable={false}/>
-                    </LazyLoad>
-                    {post.post_type === PostType.VIDEO && <PlayButton src={PlayIcon}/>}
-                </Link>
+                    <div>
+                        <LazyLoad height={300} debounce={300} once={true}>
+                            <img style={styles} src={post.post_media_thumb} draggable={false}/>
+                        </LazyLoad>
+                        {post.post_type === PostType.VIDEO && <PlayButton src={PlayIcon}/>}
+                    </div>
                 ) : (
                     <LazyLoad height={300} debounce={300} once={true}>
                         <img style={styles} src={post.post_media_thumb} draggable={false}/>
