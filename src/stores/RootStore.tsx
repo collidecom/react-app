@@ -5,6 +5,7 @@ import HomeSupporterStore from '../pages/Home/HomeSupporterStore';
 import AccessStore from './AccessStore';
 import PostStore from './PostStore';
 import HomeCreatorStore from '../pages/Home/HomeCreatorStore';
+import PlayerStore from './PlayerStore';
 
 export default class RootStore {
 
@@ -14,6 +15,7 @@ export default class RootStore {
     homeCreatorStore: HomeCreatorStore;
     accessStore: AccessStore;
     postStore: PostStore;
+    playerStore: PlayerStore;
 
     constructor() {
 
@@ -23,6 +25,7 @@ export default class RootStore {
         this.homeCreatorStore = new HomeCreatorStore(this);
         this.accessStore = new AccessStore(this);
         this.postStore = new PostStore(this);
+        this.playerStore = new PlayerStore(this);
 
     }
 

@@ -29,3 +29,55 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.player-wrapper {
+
+  width: 100%;
+  height: 60vw;
+}
+
+/* .react-player {
+
+} */
+@media (min-width: 768px) {
+  .player-wrapper {
+
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+
+    width: 400px;
+    height: 289px;
+  }
+}
+/* @media (min-width: 768px) {
+  .player-wrapper {
+    width: 400px;
+  }
+} */
+
+/* .floating-player {
+
+  width: 100%;
+  padding-top: 56.25%
+
+}
+
+.player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (min-width: 768px) {
+
+  .floating-player {
+
+    right: 0;
+    bottom: 0;
+
+    width: 400px;
+
+  }
+
+} */
