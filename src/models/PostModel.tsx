@@ -5,6 +5,7 @@ export enum PostType {
     TEXT = 'TEXT',
     VIDEO = 'VIDEO',
     IMAGE = 'IMAGE',
+    AUDIO = 'AUDIO',
 }
 
 export enum PostAccess {

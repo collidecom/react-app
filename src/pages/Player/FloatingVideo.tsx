@@ -2,6 +2,7 @@ import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import ReactPlayer from 'react-player';
+import { downloadUrlForMedia } from '../../models/MediaModel';
 
 interface Props {
 
@@ -22,13 +23,12 @@ export default class FloatingVideo extends React.Component<Props> {
     render() {
 
         const { rootStore } = this.injected;
-        const { authStore } = rootStore;
-
-        const url = 'https://www.youtube.com/watch?v=FLpE41lnc5g';
+        const { authStore, playerStore } = rootStore;
+        const { media } = playerStore;
         return (
             <div className='player-wrapper'>
                 <ReactPlayer
-                url='https://vimeo.com/243556536'
+                url={media ? downloadUrlForMedia(media) : ''}
                 className='react-player'
                 playing
                 width='100%'

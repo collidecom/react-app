@@ -26,11 +26,11 @@ export default class PlayerBar extends React.Component<Props> {
 
         const { rootStore } = this.injected;
         const { authStore, playerStore } = rootStore;
-
+        
         return (
             <div>
-                <button onClick={() => playerStore.setPlayerType(PlayerType.VIDEO)}>VIDEO</button>
-                <button onClick={() => playerStore.setPlayerType(PlayerType.AUDIO)}>AUDIO</button>
+                {/* <button onClick={() => playerStore.setPlayerType(PlayerType.VIDEO)}>VIDEO</button>
+                <button onClick={() => playerStore.setPlayerType(PlayerType.AUDIO)}>AUDIO</button> */}
                 {playerStore.playerType === PlayerType.VIDEO &&
                     <FloatingVideo/>
                 }
