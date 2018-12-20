@@ -53,7 +53,8 @@ export default class VideoChatRequestStore {
             ApiClient.get(`star/${starId}`).then((response) => {
 
                 const star = response.data.star;
-                // star video chat. (chat, star, otherDisplayName)
+                this.rootStore.videoChatStore.initializeVideoChat(chat, star, request.user.display_name)
+                
                 this.isLoadingRequest = false;
                 request.isRequesting = false;
             })

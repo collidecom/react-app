@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import { OTSession, OTPublisher, OTSubscriber, OTStreams } from 'opentok-react';
 import '@opentok/client';
+import throwError from '../../util/ThrowError';
 
 const APIKEY = '46187952';
 const SESSIONID = '2_MX40NjE4Nzk1Mn5-MTU0NTI2NjYxMjkxOH5ZU1AzYXFETTNhTHJzditGN1pSV0tOV3V-fg';
@@ -119,19 +120,26 @@ export default class VideoChatPlayer extends React.Component<Props> {
     render() {
 
         const { rootStore } = this.injected;
-        const { authStore, playerStore } = rootStore;
+        const { authStore, videoChatStore } = rootStore;
         const { error, connection, publishVideo } = this.state;
+
+        const { videoChat } = videoChatStore;
+        if (!videoChat) {
+            throwError(`nil video chat`);
+            return null;
+        }
+        const { session_id, token } = videoChat;
 
         return (
             <div>
                 VIDEO CHAT
                 <OTSession
                     apiKey={APIKEY}
-                    sessionId={SESSIONID}
-                    token={TOKEN}
+                    sessionId={session_id}
+                    token={token}
                 >
                     <OTPublisher
-                        properties={{ publishVideo, width: 400, height: 400, }}
+                        properties={{ publishVideo, width: 200, height: 200, }}
                         onPublish={this.onPublish}
                         onError={this.onPublishError}
                         eventHandlers={this.publisherEventHandlers}
