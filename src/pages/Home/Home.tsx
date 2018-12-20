@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import HomeSupporter from './HomeSupporter';
 import HomeCreator from './HomeCreator';
+import VideoChatPlayer from '../VideoChat/VideoChatPlayer';
 
 interface Props {
 
@@ -27,6 +28,7 @@ export default class Home extends React.Component<Props> {
 
         return (
             <div>
+                <VideoChatPlayer/>
                 {!authStore.isLoadingAccount &&
                     <div>
                         {!authStore.isStar && <HomeSupporter/>}
