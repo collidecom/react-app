@@ -12,6 +12,7 @@ import LandingPage from './pages/Home/LandingPage';
 import { MuiThemeProvider } from '@material-ui/core';
 import { lightTheme } from './util/theme';
 import PlayerBar from './pages/Player/PlayerBar';
+import ErrorModal from './components/Modal/ErrorModal';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -47,6 +48,7 @@ class App extends Component<Props> {
               </Switch>
             </div>
             <LoginModal/>
+            <ErrorModal/>
             <PlayerBar/>
           </MuiThemeProvider>
       </div>
