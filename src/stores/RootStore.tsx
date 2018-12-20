@@ -7,6 +7,7 @@ import PostStore from './PostStore';
 import HomeCreatorStore from '../pages/Home/HomeCreatorStore';
 import PlayerStore from './PlayerStore';
 import MediaStore from './MediaStore';
+import VideoChatRequestStore from './VideoChatRequestStore';
 
 export default class RootStore {
 
@@ -18,6 +19,7 @@ export default class RootStore {
     postStore: PostStore;
     playerStore: PlayerStore;
     mediaStore: MediaStore;
+    videoChatRequestStore: VideoChatRequestStore;
 
     constructor() {
 
@@ -29,7 +31,8 @@ export default class RootStore {
         this.postStore = new PostStore(this);
         this.playerStore = new PlayerStore(this);
         this.mediaStore = new MediaStore(this);
-
+        this.videoChatRequestStore = new VideoChatRequestStore(this);
+        
     }
 
     @action goHome = () => {
