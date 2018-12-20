@@ -22,4 +22,20 @@ declare module 'opentok-react' {
 
     export const OTPublisher: React.ComponentType<OTPublisherProps>;
 
+    export interface OTStreamsProps {
+        children: any
+    }
+
+    export const OTStreams: React.ComponentType<OTStreamsProps>
+    export interface OTSubscriberProps {
+        properties: any
+        onSubscribe(): void
+        onError(error: string): void
+        eventHandlers: {
+            videoEnabled: () => void
+            videoDisabled: () => void
+        }
+    }
+
+    export const OTSubscriber: React.ComponentType<OTSubscriberProps>;
 }
