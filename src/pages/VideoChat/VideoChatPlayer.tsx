@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
-import { OTSession, OTPublisher } from 'opentok-react';
+import { OTSession, OTPublisher, OTSubscriber, OTStreams } from 'opentok-react';
 import '@opentok/client';
 
 const APIKEY = '46187952';
@@ -130,12 +130,20 @@ export default class VideoChatPlayer extends React.Component<Props> {
                     sessionId={SESSIONID}
                     token={TOKEN}
                 >
-                <OTPublisher
-                    properties={{ publishVideo, width: 400, height: 400, }}
-                    onPublish={this.onPublish}
-                    onError={this.onPublishError}
-                    eventHandlers={this.publisherEventHandlers}
-                />
+                    <OTPublisher
+                        properties={{ publishVideo, width: 400, height: 400, }}
+                        onPublish={this.onPublish}
+                        onError={this.onPublishError}
+                        eventHandlers={this.publisherEventHandlers}
+                    />
+                    <OTStreams>
+                        <OTSubscriber
+                            properties={{ publishVideo, width: 400, height: 400, }}
+                            onSubscribe={this.onSubscribe}
+                            onError={this.onSubscribeError}
+                            eventHandlers={this.subscriberEventHandlers}
+                        />
+                    </OTStreams>
                 </OTSession>
                 
             </div>
