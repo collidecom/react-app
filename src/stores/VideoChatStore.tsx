@@ -15,7 +15,7 @@ export default class VideoChatStore {
         this.rootStore = rootStore;
     }
 
-    @observable clearVideoChat = () => {
+    @action clearVideoChat = () => {
         this.availableChat = undefined;
         this.showVideoChat = false;
     }
