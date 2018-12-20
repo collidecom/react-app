@@ -28,7 +28,6 @@ export default class Home extends React.Component<Props> {
 
         return (
             <div>
-                <VideoChatPlayer/>
                 {!authStore.isLoadingAccount &&
                     <div>
                         {!authStore.isStar && <HomeSupporter/>}
