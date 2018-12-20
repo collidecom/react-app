@@ -1,4 +1,4 @@
-export default interface AvailableChatModel {
+export default interface VideoChatModel {
     
     star_id?: number
     user_chat_room_id?: number

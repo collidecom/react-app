@@ -18,7 +18,7 @@ import { inject, observer } from 'mobx-react';
 import COLTextButton from '../Button/COLTextButton';
 import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
-import AvailableChatModel from '../../models/AvailableChatModel';
+import VideoChatModel from '../../models/VideoChatModel';
 import StarChatRequest from '../../models/StarChatRequest';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
