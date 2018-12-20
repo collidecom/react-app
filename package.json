@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^3.6.2",
     "@material-ui/icons": "^3.0.1",
+    "@opentok/client": "^2.15.4",
     "axios": "^0.18.0",
     "base-64": "^0.1.0",
     "lodash.debounce": "^4.0.8",
