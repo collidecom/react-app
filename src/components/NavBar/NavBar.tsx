@@ -188,6 +188,11 @@ class NavBar extends React.Component<Props> {
         open={isVchatMenuOpen}
         onClose={this.handleVchatMenuClose}
       >
+        {videoChatRequestStore.requests.length === 0 &&
+          <MenuItem>
+              <Typography variant='body2'>You have no pending requests</Typography>
+          </MenuItem>
+        }
         {videoChatRequestStore.requests.map((request: StarChatRequest) => 
           <MenuItem>{request.user.display_name}</MenuItem>
         )}
