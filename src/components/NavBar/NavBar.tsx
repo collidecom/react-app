@@ -20,6 +20,7 @@ import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
 import AvailableChatModel from '../../models/AvailableChatModel';
 import StarChatRequest from '../../models/StarChatRequest';
+import Link from '../Link/Link';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
@@ -203,6 +204,7 @@ class NavBar extends React.Component<Props> {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem><Link to='/settings'>Settings</Link></MenuItem>
         <MenuItem onClick={this.logout}>Logout</MenuItem>
       </Menu>
     );
