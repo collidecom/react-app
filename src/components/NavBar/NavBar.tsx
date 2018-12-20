@@ -198,8 +198,11 @@ class NavBar extends React.Component<Props> {
         {videoChatRequestStore.requests.map((request: StarChatRequest) => 
           <MenuItem
             onClick={() => videoChatRequestStore.creatorStartVideoChat(request)}
-            style={{minWidth: '300px'}}
+            style={{
+              minWidth: '300px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+            }}
           >
+          
           {request.user.display_name}
           {request.isRequesting &&
             <CircularProgress style={{width: '30px', height: '30px'}}/>
