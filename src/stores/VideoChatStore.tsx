@@ -22,6 +22,7 @@ export default class VideoChatStore {
         this.videoChat = chat;
         this.star = star;
         this.otherDisplayName = otherDisplayName;
+        this.showVideoChat = true;
     }
     
     @action clearVideoChat = () => {
