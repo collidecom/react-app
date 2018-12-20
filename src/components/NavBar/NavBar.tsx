@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
-import { Button, Fab } from '@material-ui/core';
+import { Button, Fab, CircularProgress } from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
@@ -189,12 +189,22 @@ class NavBar extends React.Component<Props> {
         onClose={this.handleVchatMenuClose}
       >
         {videoChatRequestStore.requests.length === 0 &&
-          <MenuItem>
+          <MenuItem
+          style={{minWidth: '300px'}}
+          >
               <Typography variant='body2'>You have no pending requests</Typography>
           </MenuItem>
         }
         {videoChatRequestStore.requests.map((request: StarChatRequest) => 
-          <MenuItem>{request.user.display_name}</MenuItem>
+          <MenuItem
+            onClick={() => videoChatRequestStore.creatorStartVideoChat(request)}
+            style={{minWidth: '300px'}}
+          >
+          {request.user.display_name}
+          {request.isRequesting &&
+            <CircularProgress style={{width: '30px', height: '30px'}}/>
+          }
+          </MenuItem>
         )}
       </Menu>
     );
