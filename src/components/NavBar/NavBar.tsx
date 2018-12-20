@@ -11,12 +11,15 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { Button, Fab } from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
 import COLTextButton from '../Button/COLTextButton';
 import Typography from '../Typography/Typography';
+import COLPrimaryButton from '../Button/COLPrimaryButton';
+import AvailableChatModel from '../../models/AvailableChatModel';
+import StarChatRequest from '../../models/StarChatRequest';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
@@ -121,6 +124,7 @@ class NavBar extends React.Component<Props> {
   }
 
   state = {
+    vchatAnchorEl: null,
     anchorEl: null,
     mobileMoreAnchorEl: null,
   };
@@ -133,8 +137,15 @@ class NavBar extends React.Component<Props> {
 
   };
 
+  handleVchatMenuOpen = (event: any) => {
+    this.setState({ vchatAnchorEl: event.currentTarget });
+  }
   handleProfileMenuOpen = (event: any) => {
     this.setState({ anchorEl: event.currentTarget });
+  };
+  handleVchatMenuClose = () => {
+    this.setState({ vchatAnchorEl: null });
+    // this.handleMobileMenuClose();
   };
 
   handleMenuClose = () => {
@@ -161,12 +172,27 @@ class NavBar extends React.Component<Props> {
   render() {
 
     const { rootStore } = this.injected;
-    const { authStore } = rootStore;
+    const { authStore, videoChatRequestStore } = rootStore;
     
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { vchatAnchorEl, anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
+    const isVchatMenuOpen = Boolean(vchatAnchorEl);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const renderVchatMenu = (
+      <Menu
+        anchorEl={vchatAnchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isVchatMenuOpen}
+        onClose={this.handleVchatMenuClose}
+      >
+        {videoChatRequestStore.requests.map((request: StarChatRequest) => 
+          <MenuItem>{request.user.display_name}</MenuItem>
+        )}
+      </Menu>
+    );
 
     const renderMenu = (
       <Menu
@@ -223,6 +249,7 @@ class NavBar extends React.Component<Props> {
             </div> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <Fab size='small' color='primary' onClick={this.handleVchatMenuOpen}>{videoChatRequestStore.requests.length}</Fab>
               {authStore.isLoggedIn && !authStore.isStar &&
                 <COLTextButton>
                   <img src={CreditsIcon} style={{marginRight: '8px'}}/>
@@ -255,6 +282,7 @@ class NavBar extends React.Component<Props> {
             </div>
           </Toolbar>
         </AppBar>
+        {renderVchatMenu}
         {renderMenu}
         {renderMobileMenu}
       </div>
