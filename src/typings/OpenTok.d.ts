@@ -8,7 +8,14 @@ declare module 'opentok-react' {
         apiKey: string
         sessionId: string
         token: string
+        onError: (error: string) => void
         onStreamsUpdated?: (streams: any) => void
+        eventHandlers: {
+            sessionConnected: () => void
+            sessionDisconnected: () => void
+            sessionReconnected: () => void
+            sessionReconnecting: () => void
+        }
     }
 
     export class OTSession extends React.Component<OTSessionProps> {

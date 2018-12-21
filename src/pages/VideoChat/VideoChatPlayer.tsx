@@ -130,6 +130,7 @@ export default class VideoChatPlayer extends React.Component<Props> {
         }
         const { session_id, token } = videoChat;
 
+        console.log(`connection: ${connection}`)
         return (
             <div>
                 VIDEO CHAT
@@ -137,6 +138,8 @@ export default class VideoChatPlayer extends React.Component<Props> {
                     apiKey={APIKEY}
                     sessionId={session_id}
                     token={token}
+                    onError={this.onSessionError}
+                    eventHandlers={this.sessionEventHandlers}
                 >
                     <OTPublisher
                         properties={{ publishVideo, width: 200, height: 200, }}
