@@ -25,7 +25,7 @@ export default class VideoChatStore {
         this.showVideoChat = true;
     }
     
-    @action clearVideoChat = () => {
+    @action endVideoChat = () => {
         this.videoChat = undefined;
         this.showVideoChat = false;
     }

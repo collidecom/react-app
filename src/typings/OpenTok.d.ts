@@ -3,6 +3,19 @@ declare module 'opentok-react' {
         session: any
         stream: any
     }
+
+    export function createSession({ apiKey, sessionId, token, onStreamsUpdated }: {
+            apiKey: string,
+            sessionId: string,
+            token: string,
+            onStreamsUpdated: (streams: any) => void
+            eventHandlers: {
+                streamCreated: (event: any) => void
+                streamDestroyed: (event: any) => void
+            }
+        }
+    ): any;
+
     export interface OTSessionProps {
         children: any
         apiKey: string
@@ -30,8 +43,8 @@ declare module 'opentok-react' {
         onError(error: string): void
         eventHandlers: {
             accessDenied: () => void
-            streamCreated: () => void
-            streamDestroyed: (error: {reason: any}) => void
+            streamCreated: (event: any) => void
+            streamDestroyed: (event: any) => void
         }
 
     }
@@ -53,6 +66,7 @@ declare module 'opentok-react' {
         session?: any
         properties: any
         onSubscribe(): void
+        stream: any
         onError(error: string): void
         eventHandlers: {
             videoEnabled: () => void

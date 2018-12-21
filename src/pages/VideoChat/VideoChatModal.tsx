@@ -43,9 +43,9 @@ class VideoChatModal extends React.Component<Props> {
     }
 
     handleClose = () => {
-        const { rootStore } = this.injected;
-        const { videoChatStore } = rootStore;
-        videoChatStore.clearVideoChat();
+        // const { rootStore } = this.injected;
+        // const { videoChatStore } = rootStore;
+        // videoChatStore.clearVideoChat();
     };
 
     render() {
@@ -73,7 +73,12 @@ class VideoChatModal extends React.Component<Props> {
                             root: classes.dialogRoot
                         }}
                     >
-                        <VideoChatPlayer/>
+                        {videoChatStore.videoChat &&
+                            <VideoChatPlayer
+                                chat={videoChatStore.videoChat}
+                            />
+                        }
+
                     </DialogContent>
                 </Dialog>
             </div>
