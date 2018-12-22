@@ -22,7 +22,7 @@ export default class ApiClient {
         return getRequest(finalURl, params);
     }
 
-    post(controller: string, params: {}): Promise<any> {
+    static post(controller: string, params: {}): Promise<any> {
         if (!controller) {
             throw 'Controller cannot be null';
         }
@@ -31,7 +31,7 @@ export default class ApiClient {
         return postRequest(finalURl, params);
     }
 
-    postWithProgress(controller: string, params: {}, callback: any): Promise<any> {
+    static postWithProgress(controller: string, params: {}, callback: any): Promise<any> {
         if (!controller) {
             throw 'Controller cannot be null';
         }
