@@ -9,6 +9,7 @@ import PlayerStore from './PlayerStore';
 import MediaStore from './MediaStore';
 import VideoChatRequestStore from './VideoChatRequestStore';
 import ErrorStore from './ErrorStore';
+import VideoChatStore from './VideoChatStore';
 
 export default class RootStore {
 
@@ -21,6 +22,7 @@ export default class RootStore {
     playerStore: PlayerStore;
     mediaStore: MediaStore;
     videoChatRequestStore: VideoChatRequestStore;
+    videoChatStore: VideoChatStore;
     errorStore: ErrorStore;
 
     constructor() {
@@ -34,6 +36,7 @@ export default class RootStore {
         this.playerStore = new PlayerStore(this);
         this.mediaStore = new MediaStore(this);
         this.videoChatRequestStore = new VideoChatRequestStore(this);
+        this.videoChatStore = new VideoChatStore(this);
         this.errorStore = new ErrorStore(this);
 
     }

@@ -11,14 +11,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
-import { Button, Fab } from '@material-ui/core';
+import { Button, Fab, CircularProgress } from '@material-ui/core';
 import { ButtonProps } from '@material-ui/core/Button';
 import RootStore from '../../stores/RootStore';
 import { inject, observer } from 'mobx-react';
 import COLTextButton from '../Button/COLTextButton';
 import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
-import AvailableChatModel from '../../models/AvailableChatModel';
+import VideoChatModel from '../../models/VideoChatModel';
 import StarChatRequest from '../../models/StarChatRequest';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
@@ -188,8 +188,27 @@ class NavBar extends React.Component<Props> {
         open={isVchatMenuOpen}
         onClose={this.handleVchatMenuClose}
       >
+        {videoChatRequestStore.requests.length === 0 &&
+          <MenuItem
+          style={{minWidth: '300px'}}
+          >
+              <Typography variant='body2'>You have no pending requests</Typography>
+          </MenuItem>
+        }
         {videoChatRequestStore.requests.map((request: StarChatRequest) => 
-          <MenuItem>{request.user.display_name}</MenuItem>
+          <MenuItem
+            key={request.video_chat_request_id}
+            onClick={() => videoChatRequestStore.creatorStartVideoChat(request)}
+            style={{
+              minWidth: '300px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+            }}
+          >
+          
+          {request.user.display_name}
+          {request.isRequesting &&
+            <CircularProgress style={{width: '30px', height: '30px'}}/>
+          }
+          </MenuItem>
         )}
       </Menu>
     );

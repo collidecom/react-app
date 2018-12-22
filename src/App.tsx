@@ -13,6 +13,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { lightTheme } from './util/theme';
 import PlayerBar from './pages/Player/PlayerBar';
 import ErrorModal from './components/Modal/ErrorModal';
+import VideoChatModal from './pages/VideoChat/VideoChatModal';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -50,6 +51,7 @@ class App extends Component<Props> {
             <LoginModal/>
             <ErrorModal/>
             <PlayerBar/>
+            <VideoChatModal/>
           </MuiThemeProvider>
       </div>
     );

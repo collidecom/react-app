@@ -12,4 +12,7 @@ export default interface StarChatRequest {
 
     duration: number
 
+    // client-side property. not sent down by server
+    isRequesting: boolean
+
 }
