@@ -1,6 +1,7 @@
 import { RouterStore } from 'mobx-react-router';
 import { action } from 'mobx';
 import AuthStore from './AuthStore';
+import NavBarStore from '../components/NavBar/NavBarStore';
 import HomeSupporterStore from '../pages/Home/HomeSupporterStore';
 import AccessStore from './AccessStore';
 import PostStore from './PostStore';
@@ -15,6 +16,7 @@ export default class RootStore {
 
     routerStore: RouterStore;
     authStore: AuthStore;
+    navBarStore: NavBarStore;
     homeSupporterStore: HomeSupporterStore;
     homeCreatorStore: HomeCreatorStore;
     accessStore: AccessStore;
@@ -29,6 +31,7 @@ export default class RootStore {
 
         this.routerStore = new RouterStore();
         this.authStore = new AuthStore(this);
+        this.navBarStore = new NavBarStore(this);
         this.homeSupporterStore = new HomeSupporterStore(this);
         this.homeCreatorStore = new HomeCreatorStore(this);
         this.accessStore = new AccessStore(this);

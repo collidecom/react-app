@@ -14,6 +14,8 @@ import { lightTheme } from './util/theme';
 import PlayerBar from './pages/Player/PlayerBar';
 import ErrorModal from './components/Modal/ErrorModal';
 import VideoChatModal from './pages/VideoChat/VideoChatModal';
+import Registration from './pages/creator/Registration/Registration';
+import AppCreator from './pages/creator/Registration/AppCreator';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -46,6 +48,7 @@ class App extends Component<Props> {
               <Switch>
                 <Route exact={true} path='/' component={LandingPage} />
                 <Route exact={true} path='/app' component={Home} />
+                <Route exact={true} path='/creator/onboard/signup' component={AppCreator} /> 
               </Switch>
             </div>
             <LoginModal/>
