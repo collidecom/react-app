@@ -270,22 +270,24 @@ class NavBar extends React.Component<Props> {
               </div> */}
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
-                <Fab size='small' color='primary' onClick={this.handleVchatMenuOpen}>{videoChatRequestStore.requests.length}</Fab>
-                {authStore.isLoggedIn && !authStore.isStar &&
-                  <COLTextButton>
-                    <img src={CreditsIcon} style={{marginRight: '8px'}}/>
-                    <Typography variant='body2'>{authStore.credits()}</Typography>                  
-                  </COLTextButton>
-                }
-  
                 {authStore.isLoggedIn &&
-                  <COLTextButton
-                    aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleProfileMenuOpen}
-                  >
-                    {(authStore.user && (authStore.user.display_name || authStore.user!.profile_name))}
-                  </COLTextButton>
+
+                  <>
+                    <Fab size='small' color='primary' onClick={this.handleVchatMenuOpen}>{videoChatRequestStore.requests.length}</Fab>
+                    {!authStore.isStar &&
+                      <COLTextButton>
+                        <img src={CreditsIcon} style={{marginRight: '8px'}}/>
+                        <Typography variant='body2'>{authStore.credits()}</Typography>                  
+                      </COLTextButton>
+                    }
+                    <COLTextButton
+                      aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                      aria-haspopup="true"
+                      onClick={this.handleProfileMenuOpen}
+                    >
+                      {(authStore.user && (authStore.user.display_name || authStore.user!.profile_name))}
+                    </COLTextButton>
+                  </>
                 }
                 {!authStore.isLoggedIn &&
                   <COLTextButton
