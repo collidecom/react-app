@@ -12,7 +12,7 @@ import { Checkbox, Dialog, Typography } from '@material-ui/core';
 import COLTextButton from '../../../components/Button/COLTextButton';
 import COLUnderlinedButton from '../../../components/Button/COLUnderlinedButton';
 import RootStore from '../../../stores/RootStore';
-import { COLHeader } from '../../../components/Typography/Typography';
+import { COLHeader, COLErrorMessage } from '../../../components/Typography/Typography';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
@@ -24,9 +24,11 @@ const RegisterSchema = Yup.object().shape({
   password: Yup.string()
     .required('Enter your password')
     .min(6, 'Must be at least 6 characters'),
-  ageConsent: Yup.string()
-    .required('You must be at least 13 years old'),
-  rating: Yup.string()
+  ageConsent: Yup.boolean()
+    .oneOf([true], 'You must be at least 13 years old'),
+  termsAgreed: Yup.boolean()
+    .oneOf([true], 'Please agree to our terms'),
+  rating: Yup.number()
     .min(1, 'Select mature rating'),
 });
 interface RegisterFormValues {
@@ -34,6 +36,7 @@ interface RegisterFormValues {
   email: string;
   password: string;
   ageConsent: boolean;
+  termsAgreed: boolean;
   rating: number;
 }
 const textStyle = {
@@ -120,6 +123,7 @@ class Registration extends React.Component<Props, {}> {
             email: '',
             password: '',
             ageConsent: false,
+            termsAgreed: false,
             rating: 0,
           }}
           validationSchema={RegisterSchema}
@@ -139,9 +143,11 @@ class Registration extends React.Component<Props, {}> {
                       fullWidth={true}
                       {...field}
                     />
+                    <COLErrorMessage>
                     {form.touched.username &&
                       form.errors.username &&
                       form.errors.username}
+                      </COLErrorMessage>
                   </>
                 )}
               />
@@ -155,9 +161,11 @@ class Registration extends React.Component<Props, {}> {
                     fullWidth={true}
                     {...field}
                   />
+                  <COLErrorMessage>
                   {form.touched.email &&
                     form.errors.email &&
                     form.errors.email}
+                    </COLErrorMessage>
                   </>
                 )}
               />
@@ -171,9 +179,12 @@ class Registration extends React.Component<Props, {}> {
                       fullWidth={true}
                       {...field}
                     />
+                    <COLErrorMessage>
                     {form.touched.password &&
                       form.errors.password &&
                       form.errors.password}
+                    </COLErrorMessage>
+                    <br/>
                   </>
                 )}
               />
@@ -195,6 +206,11 @@ class Registration extends React.Component<Props, {}> {
                       label={<span style={textStyle}>I am at least 13</span>}
                     />
                     <COLUnderlinedButton>Why?</COLUnderlinedButton>
+                    <COLErrorMessage>
+                    {form.touched.ageConsent &&
+                      form.errors.ageConsent &&
+                      form.errors.ageConsent}
+                      </COLErrorMessage>
                   </>
                 )}
               />
@@ -223,6 +239,11 @@ class Registration extends React.Component<Props, {}> {
                     >
                     Terms of Service
                     </COLUnderlinedButton>
+                    <COLErrorMessage>
+                    {form.touched.termsAgreed &&
+                      form.errors.termsAgreed &&
+                      form.errors.termsAgreed}
+                      </COLErrorMessage>
                   </>
                 )}
               />
@@ -270,6 +291,11 @@ class Registration extends React.Component<Props, {}> {
                     />
                     <p className="matureText">Uploading <strong>Mature <br/>Rated </strong>Content</p>
                   </label>
+                  <COLErrorMessage>
+                  {form.touched.rating &&
+                    form.errors.rating &&
+                    form.errors.rating}
+                  </COLErrorMessage>
                 </div>
               )}
               />
