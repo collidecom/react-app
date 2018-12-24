@@ -161,11 +161,12 @@ class Registration extends React.Component<Props, {}> {
                     fullWidth={true}
                     {...field}
                   />
-                  <COLErrorMessage>
                   {form.touched.email &&
                     form.errors.email &&
-                    form.errors.email}
+                    <COLErrorMessage>
+                    {form.errors.email}
                     </COLErrorMessage>
+                  }
                   </>
                 )}
               />
@@ -179,11 +180,12 @@ class Registration extends React.Component<Props, {}> {
                       fullWidth={true}
                       {...field}
                     />
-                    <COLErrorMessage>
                     {form.touched.password &&
                       form.errors.password &&
-                      form.errors.password}
-                    </COLErrorMessage>
+                      <COLErrorMessage>
+                      {form.errors.password}
+                      </COLErrorMessage>
+                    }
                     <br/>
                   </>
                 )}
@@ -205,11 +207,12 @@ class Registration extends React.Component<Props, {}> {
                       label={<span style={textStyle}>I am at least 13</span>}
                     />
                     <COLUnderlinedButton>Why?</COLUnderlinedButton>
-                    <COLErrorMessage>
                     {form.touched.ageConsent &&
                       form.errors.ageConsent &&
-                      form.errors.ageConsent}
+                      <COLErrorMessage>
+                      {form.errors.ageConsent}
                       </COLErrorMessage>
+                    }
                   </>
                 )}
               />
@@ -237,11 +240,12 @@ class Registration extends React.Component<Props, {}> {
                     >
                     Terms of Service
                     </COLUnderlinedButton>
-                    <COLErrorMessage>
                     {form.touched.termsAgreed &&
                       form.errors.termsAgreed &&
-                      form.errors.termsAgreed}
+                      <COLErrorMessage>
+                      {form.errors.termsAgreed}
                       </COLErrorMessage>
+                    }
                   </>
                 )}
               />
@@ -289,11 +293,12 @@ class Registration extends React.Component<Props, {}> {
                     />
                     <p className="matureText">Uploading <strong>Mature <br/>Rated </strong>Content</p>
                   </label>
-                  <COLErrorMessage>
                   {form.touched.rating &&
                     form.errors.rating &&
-                    form.errors.rating}
+                    <COLErrorMessage>
+                    {form.errors.rating}
                   </COLErrorMessage>
+                  }
                 </div>
               )}
               />
