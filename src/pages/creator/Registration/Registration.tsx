@@ -90,9 +90,6 @@ class Registration extends React.Component<Props, {}> {
 
     const rootStore = this.injected.rootStore;
     const { registrationStore } = rootStore;
-    // const onboardingStore = this.props.creatorStore!;
-    // const store = onboardingStore.descriptionStore;
-    // const isLoading = onboardingStore.isLoading;
 
     let hideMatureClasses: string;
     if (this.state.hideMature) {
