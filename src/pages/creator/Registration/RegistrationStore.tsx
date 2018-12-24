@@ -11,13 +11,13 @@ export default class RegistrationStore {
         this.rootStore = rootStore;
     }
 
-    @action checkDuplicate() {
+    @action checkDuplicate(username: string, email: string) {
 
         const usernamePromise = ApiClient.post('register/validate_username', {
-            username: 'devsuppovrter'
+            username: username
         });
         const emailPromise = ApiClient.post('register/validate_email', {
-            email: 'devsupporter@gmail.com'
+            email: email
         });
         Promise.all([usernamePromise, emailPromise]).then(() => {
             
