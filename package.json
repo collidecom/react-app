@@ -9,6 +9,7 @@
     "@opentok/client": "^2.15.4",
     "axios": "^0.18.0",
     "base-64": "^0.1.0",
+    "formik": "^1.4.1",
     "lodash.debounce": "^4.0.8",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
@@ -21,7 +22,8 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "styled-components": "^4.1.2"
+    "styled-components": "^4.1.2",
+    "yup": "^0.26.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,6 +47,7 @@
     "@types/react-lazyload": "^2.3.1",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.4",
+    "@types/yup": "^0.26.3",
     "react-player": "^1.7.1",
     "typescript": "^3.2.2"
   }

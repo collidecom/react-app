@@ -3,20 +3,38 @@ import { inject, observer } from 'mobx-react';
 import CreatorStore from '../../../stores/CreatorStore';
 import { URLPATHS } from '../../../util/Steps';
 
-// import { ValidatorForm } from 'react-material-ui-form-validator';
+import { Formik, FormikProps, Form, Field, FieldProps } from 'formik';
+import * as Yup from 'yup';
 
 import { COLTextField } from '../../../components/TextField/COLTextField';
 import { COLPrimaryButton } from '../../../components/Button/COLPrimaryButton';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import { COLUnderlineButton } from '../../../components/buttons/COLUnderlineButton';
 import { Checkbox, Dialog, Typography } from '@material-ui/core';
-// import { ProgressIndicator } from '../../../components/ProgressIndicator';
-import styled from 'styled-components';
-// import { COLClearButton } from '../../../components/buttons/COLClearButton';
-// import { COLSecondaryButton } from '../../../components/buttons/COLSecondaryButton';
 
 import ApiClient from '../../../util/ApiClient';
 import COLTextButton from '../../../components/Button/COLTextButton';
+import { UnderlinedLink } from '../../../components/Link/Link';
+import COLUnderlinedButton from '../../../components/Button/COLUnderlinedButton';
+
+const RegisterSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Enter your display name')
+    .min(3, 'Must be at least 3 characters'),
+  email: Yup.string()
+    .required('Enter your email')
+    .email('Invalid email'),
+  password: Yup.string()
+    .required('Enter your password')
+    .min(6, 'Must be at least 6 characters'),
+  ageConsent: Yup.string()
+    .required('You must be at least 13 years old'),
+});
+interface RegisterFormValues {
+  username: string;
+  email: string;
+  password: string;
+  ageConsent: boolean;
+}
 
 interface Props {
   creatorStore?: CreatorStore;
@@ -24,10 +42,13 @@ interface Props {
 const textStyle = {
   color: '#aab2bd',
   minWidth: '150px',
-  // fontFamily: 'MarkOT-Medium',
-  // fontSize: '16px',
+  fontFamily: 'MarkOT-Medium',
+  fontSize: '16px',
 };
 
+const FormControlStyle = {
+  margin: '0 0 0 -16px'
+};
 // @inject('creatorStore')
 // @observer
 class Registration extends React.Component<Props, {}> {
@@ -163,87 +184,116 @@ class Registration extends React.Component<Props, {}> {
             Create an account
           </Typography>
 
-          {/* <ValidatorForm
-            onSubmit={() => this.handleSubmit(true)}
-            onError={(errors: string[]) => console.log(errors)}
-          > */}
-            <COLTextField
-              name="username"
-              fullWidth={true}
-              placeholder="Your Display Name"
-              // value={onboardingStore.user.username}
-              onChange={(e) => this.handleChange(e)}
-              onBlur={(e) => this.checkDuplication(e)}
-              // validators={['required', 'minStringLength:3']}
-              // errorMessages={['Enter your name', 'Must be at least 3 characters']}
-            /><br />
-            <COLTextField
-              name="email"
-              type="email"
-              fullWidth={true}
-              placeholder="Your Email"
-              // value={onboardingStore.user.email}
-              onChange={(e) => this.handleChange(e)}
-              onBlur={(e) => this.checkDuplication(e)}
-              // validators={['required', 'isEmail']}
-              // errorMessages={['Enter your email', 'Email is not valid']}
-            /><br />
-            <COLTextField
-              name="password"
-              fullWidth={true}
-              placeholder="Password"
-              type="password"
-              // value={onboardingStore.user.password}
-              onChange={(e) => this.handleChange(e)}
-              // validators={['required', 'minStringLength:6']}
-              // errorMessages={['Enter your password', 'Must be at least 6 characters']}
-            /><br />
-
-            <div
-              style={{display: 'flex', alignItems: 'center'}}
-            >
-            <div>
-              <FormControlLabel
-                name="ageConsent"
-                style={{marginRight: 0}}
-                control={
-                  <Checkbox
-                    color="primary"
-                    // checked={onboardingStore.user.ageConsent}
-                    onChange={(e, checked) => this.handleCheck(e, checked)}
-                  />
-                }
-                label={<span style={textStyle}>I am at least 13</span>}
+          <Formik
+          initialValues={{
+            username: '',
+            email: '',
+            password: '',
+            ageConsent: false
+          }}
+          validationSchema={RegisterSchema}
+          onSubmit={(values: RegisterFormValues) => alert(JSON.stringify(values))}
+          render={(formikBag: FormikProps<RegisterFormValues>) => (
+            <Form>
+              <Field
+                name="username"
+                render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                  <>
+                    <COLTextField
+                      placeholder="Your Display Name"
+                      fullWidth={true}
+                      {...field}
+                    />
+                    {form.touched.username &&
+                      form.errors.username &&
+                      form.errors.username}
+                  </>
+                )}
               />
-              <COLTextButton
-                style={{paddingLeft: '8px'}}
-                // onClick={() => store.toggleShowHelp('age')}
-              >Why?
-              </COLTextButton>
-              <br />
-              <FormControlLabel
-                name="termsAgreed"
-                style={{marginRight: 0}}
-                control={
-                  <Checkbox
-                    color="primary"
-                    // checked={onboardingStore.user.termsAgreed}
-                    onChange={(e, checked) => this.handleCheck(e, checked)}
+              <Field
+                name='email'
+                render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                  <>
+                    <COLTextField
+                    type='email'
+                    placeholder='Your Email'
+                    fullWidth={true}
+                    {...field}
                   />
-                }
-                label={<span style={textStyle}>I agree to the</span>}
+                  {form.touched.email &&
+                    form.errors.email &&
+                    form.errors.email}
+                  </>
+                )}
               />
-              <COLTextButton
-                style={{paddingLeft: '8px'}}
-                onClick={() => {
-                  window.open('/terms', '_blank');
-                }}
-              >
-              Terms of Service
-              </COLTextButton>
-            </div>
-            </div>
-
+              <Field
+                name='password'
+                render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                  <>
+                    <COLTextField
+                      type='password'
+                      placeholder='Password'
+                      fullWidth={true}
+                      {...field}
+                    />
+                    {form.touched.password &&
+                      form.errors.password &&
+                      form.errors.password}
+                  </>
+                )}
+              />
+              <Field
+                name='ageConsent'
+                render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                  <>
+                    <FormControlLabel
+                      style={FormControlStyle}
+                      control={
+                        <Checkbox
+                          color="primary"
+                          {...field}
+                          onChange={(e, checked) => {
+                            form.setFieldValue(field.name, checked);
+                          }}
+                        />
+                      }
+                      label={<span style={textStyle}>I am at least 13</span>}
+                    />
+                    <COLUnderlinedButton>Why?</COLUnderlinedButton>
+                  </>
+                )}
+              />
+              <br/>
+              <Field
+                name='termsAgreed'
+                render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                  <>
+                    <FormControlLabel
+                      style={FormControlStyle}
+                      control={
+                        <Checkbox
+                          color="primary"
+                          {...field}
+                          onChange={(e, checked) => {
+                            form.setFieldValue(field.name, checked);
+                          }}
+                        />
+                      }
+                      label={<span style={textStyle}>I agree to the</span>}
+                    />
+                    <COLUnderlinedButton
+                      onClick={() => {
+                        window.open('/terms', '_blank');
+                      }}
+                    >
+                    Terms of Service
+                    </COLUnderlinedButton>
+                  </>
+                )}
+              />
+            </Form>
+          )}
+          />
             <div id="mode-group" className="btn-group" data-toggle="buttons" style={{margin: '0 auto 16px auto', display: 'block', textAlign: 'center'}}>
               <label
                 className={hideMatureClasses}
