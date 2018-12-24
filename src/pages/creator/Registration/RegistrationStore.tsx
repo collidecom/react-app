@@ -9,7 +9,6 @@ export default class RegistrationStore {
     
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
-        this.checkDuplicate()
     }
 
     @action checkDuplicate() {
