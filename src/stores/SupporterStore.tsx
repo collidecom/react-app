@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx';
-import { URLPathModel, URLPATHS } from '../util/Steps';
+import { URLPathModel, URLPATHS } from '../util/URLPaths';
 import ApiClient from '../util/ApiClient';
 
 import createBrowserHistory from 'history/createBrowserHistory';

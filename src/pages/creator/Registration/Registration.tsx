@@ -129,7 +129,7 @@ class Registration extends React.Component<Props, {}> {
           validationSchema={RegisterSchema}
           onSubmit={(values: RegisterFormValues) => {
             // local validation passed. make server calls for final validation
-            registrationStore.checkDuplicate(values.email, values.username);
+            registrationStore.checkDuplicate(values.username, values.email);
 
           }}
           render={(formikBag: FormikProps<RegisterFormValues>) => (

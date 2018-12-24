@@ -2,6 +2,7 @@
 import RootStore from '../../../stores/RootStore';
 import { observable, action } from 'mobx';
 import ApiClient from '../../../util/ApiClient';
+import { URLPATHS } from '../../../util/URLPaths';
 
 export default class RegistrationStore {
 
@@ -22,6 +23,7 @@ export default class RegistrationStore {
         Promise.all([usernamePromise, emailPromise]).then(() => {
             
             // go to next page?
+            this.rootStore.routerStore.push(URLPATHS.CREATOR.profile.path);
 
         }).catch((error) => {
             this.rootStore.errorStore.setErrorMessage(error);
