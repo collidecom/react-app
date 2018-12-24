@@ -197,7 +197,6 @@ class Registration extends React.Component<Props, {}> {
                       control={
                         <Checkbox
                           color="primary"
-                          {...field}
                           onChange={(e, checked) => {
                             form.setFieldValue(field.name, checked);
                           }}
@@ -224,7 +223,6 @@ class Registration extends React.Component<Props, {}> {
                       control={
                         <Checkbox
                           color="primary"
-                          {...field}
                           onChange={(e, checked) => {
                             form.setFieldValue(field.name, checked);
                           }}
