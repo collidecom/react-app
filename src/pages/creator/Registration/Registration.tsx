@@ -12,6 +12,7 @@ import { Checkbox, Dialog, Typography } from '@material-ui/core';
 import COLTextButton from '../../../components/Button/COLTextButton';
 import COLUnderlinedButton from '../../../components/Button/COLUnderlinedButton';
 import RootStore from '../../../stores/RootStore';
+import { COLHeader } from '../../../components/Typography/Typography';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
@@ -109,9 +110,9 @@ class Registration extends React.Component<Props, {}> {
     return (
       <div>
         <div style={{opacity: 1}}>
-          <Typography variant='h3'>
-            Create an account
-          </Typography>
+          <COLHeader>
+          Create an account
+          </COLHeader>
 
           <Formik
           initialValues={{
