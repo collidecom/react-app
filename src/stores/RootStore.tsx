@@ -11,6 +11,7 @@ import MediaStore from './MediaStore';
 import VideoChatRequestStore from './VideoChatRequestStore';
 import ErrorStore from './ErrorStore';
 import VideoChatStore from './VideoChatStore';
+import RegistrationStore from '../pages/creator/Registration/RegistrationStore';
 
 export default class RootStore {
 
@@ -27,6 +28,9 @@ export default class RootStore {
     videoChatStore: VideoChatStore;
     errorStore: ErrorStore;
 
+    // onboarding
+    registrationStore: RegistrationStore;
+
     constructor() {
 
         this.routerStore = new RouterStore();
@@ -41,6 +45,8 @@ export default class RootStore {
         this.videoChatRequestStore = new VideoChatRequestStore(this);
         this.videoChatStore = new VideoChatStore(this);
         this.errorStore = new ErrorStore(this);
+
+        this.registrationStore = new RegistrationStore(this);
 
     }
 

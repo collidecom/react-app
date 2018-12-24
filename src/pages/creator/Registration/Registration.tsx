@@ -15,6 +15,7 @@ import ApiClient from '../../../util/ApiClient';
 import COLTextButton from '../../../components/Button/COLTextButton';
 import { UnderlinedLink } from '../../../components/Link/Link';
 import COLUnderlinedButton from '../../../components/Button/COLUnderlinedButton';
+import RootStore from '../../../stores/RootStore';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
@@ -28,16 +29,15 @@ const RegisterSchema = Yup.object().shape({
     .min(6, 'Must be at least 6 characters'),
   ageConsent: Yup.string()
     .required('You must be at least 13 years old'),
+  rating: Yup.string()
+    .min(1, 'Select mature rating'),
 });
 interface RegisterFormValues {
   username: string;
   email: string;
   password: string;
   ageConsent: boolean;
-}
-
-interface Props {
-  creatorStore?: CreatorStore;
+  rating: number;
 }
 const textStyle = {
   color: '#aab2bd',
@@ -49,9 +49,19 @@ const textStyle = {
 const FormControlStyle = {
   margin: '0 0 0 -16px'
 };
-// @inject('creatorStore')
-// @observer
+interface Props {
+  
+}
+interface InjectedProps extends Props {
+  rootStore: RootStore
+}
+@inject('rootStore')
+@observer
 class Registration extends React.Component<Props, {}> {
+
+  get injected() {
+    return this.props as InjectedProps;
+  }
 
   state = {
     hideMature: false,
@@ -61,44 +71,6 @@ class Registration extends React.Component<Props, {}> {
 
   componentDidMount() {
 
-  }
-
-  checkDuplication(event: any) {
-
-    const name = event.target.name;
-    const store = this.props.creatorStore!;
-    if (store.user.username || store.user.email) {
-
-    if (name === 'username') {
-
-      ApiClient.get('register/validate_username',
-      {username: this.props.creatorStore!.user.username}).then().catch((error: string) => {
-        this.props.creatorStore!.error = error;
-        // this.props.creatorStore!.user.username = '';
-
-      });
-      }
-      else {
-        ApiClient.get('register/validate_email',
-        {email: this.props.creatorStore!.user.email}).then().catch((error: string) => {
-          this.props.creatorStore!.error = error;
-          // this.props.creatorStore!.user.email = '';
-
-        });
-      }
-    }
-  }
-
-  handleChange(event: any) {
-    this.props.creatorStore!.updateUser(event.currentTarget.name, event.currentTarget.value);
-  }
-
-  handleCheck(event: any, checked: boolean) {
-    this.props.creatorStore!.updateUserChecked(event.currentTarget.name, checked);
-  }
-
-  handleAgeCheck(event: any) {
-    this.props.creatorStore!.updateUserChecked(event.target.name, event.target.checked);
   }
 
   handleUserRating(name: string) {
@@ -115,51 +87,18 @@ class Registration extends React.Component<Props, {}> {
         showMatureModal: true,
       });
     }
-    this.props.creatorStore!.updateUserRating(name);
-  }
-
-  handleSubmit = (mobile: boolean) => {
-    // Check if user ticked checkboxes first.
-    const onboardingStore = this.props.creatorStore!;
-
-    if (!onboardingStore.user.termsAgreed) {
-      onboardingStore.error = 'Please agree to our terms';
-      return;
-    }
-
-    if (!onboardingStore.user.ageConsent) {
-      onboardingStore.error = 'You must be at least 13 years old';
-      return;
-    }
-
-    if (onboardingStore.user.rating === 0) {
-      onboardingStore.error = 'Select mature rating';
-      return;
-    }
-
-    ApiClient.get('register/validate_username', {
-      username: this.props.creatorStore!.user.username
-    }).then(() => {
-      ApiClient.get('register/validate_email', {
-        email: this.props.creatorStore!.user.email
-      }).then(() => {
-          this.props.creatorStore!.push(URLPATHS.CREATOR.profile);
-      }).catch((error: string) => {
-          this.props.creatorStore!.error = error;
-        });
-    }).catch((error: string) => {
-        this.props.creatorStore!.error = error;
-      });
-
+    // this.props.creatorStore!.updateUserRating(name);
   }
 
   render() {
 
+    const rootStore = this.injected.rootStore;
+    const { registrationStore } = rootStore;
     // const onboardingStore = this.props.creatorStore!;
     // const store = onboardingStore.descriptionStore;
     // const isLoading = onboardingStore.isLoading;
 
-    let hideMatureClasses;
+    let hideMatureClasses: string;
     if (this.state.hideMature) {
       hideMatureClasses = 'btn btn-matureGrey mature-icon mature-icon-hide active';
     }
@@ -167,7 +106,7 @@ class Registration extends React.Component<Props, {}> {
       hideMatureClasses = 'btn btn-matureGrey mature-icon mature-icon-hide';
     }
 
-    let showMatureClasses;
+    let showMatureClasses: string;
     if (this.state.showMature) {
       showMatureClasses = 'btn btn-matureGrey mature-icon mature-icon-show active';
     }
@@ -176,9 +115,6 @@ class Registration extends React.Component<Props, {}> {
     }
     return (
       <div>
-        {/* {isLoading &&
-          <ProgressIndicator/>
-        } */}
         <div style={{opacity: 1}}>
           <Typography variant='h3'>
             Create an account
@@ -189,10 +125,15 @@ class Registration extends React.Component<Props, {}> {
             username: '',
             email: '',
             password: '',
-            ageConsent: false
+            ageConsent: false,
+            rating: 0,
           }}
           validationSchema={RegisterSchema}
-          onSubmit={(values: RegisterFormValues) => alert(JSON.stringify(values))}
+          onSubmit={(values: RegisterFormValues) => {
+            // local validation passed. make server calls for final validation
+            registrationStore.checkDuplicate();
+
+          }}
           render={(formikBag: FormikProps<RegisterFormValues>) => (
             <Form>
               <Field
@@ -291,64 +232,65 @@ class Registration extends React.Component<Props, {}> {
                   </>
                 )}
               />
+              <Field
+              name='rating'
+              render={({ field, form }: FieldProps<RegisterFormValues>) => (
+                <div id="mode-group" className="btn-group" data-toggle="buttons" style={{margin: '0 auto 16px auto', display: 'block', textAlign: 'center'}}>
+                  <label
+                    className={hideMatureClasses}
+                  >
+                    <input
+                      type="radio"
+                      name="hide"
+                      value="hide-mature"
+                      id="hide-mature-radio"
+                      onClick={() => {
+                        this.setState({
+                          hideMature: true,
+                          showMature: false,
+                        })
+                        form.setFieldValue(field.name, 2)
+                      }}
+                    />
+                    <p className="matureText">Uploading <strong>Family <br/>Friendly </strong>Content</p>
+                  </label>
+
+                  <label
+                    className={showMatureClasses}
+                    data-toggle="modal"
+                    data-target=".bs-mature-modal-sm"
+                  >
+                    <input
+                      type="radio"
+                      name="show"
+                      value="show-mature"
+                      id="show-mature-radio"
+                      onClick={() => {
+                        this.setState({
+                          hideMature: false,
+                          showMature: true,
+                          showMatureModal: true,
+                        });
+                        form.setFieldValue(field.name, 1)
+                      }}
+                    />
+                    <p className="matureText">Uploading <strong>Mature <br/>Rated </strong>Content</p>
+                  </label>
+                </div>
+              )}
+              />
+              <div
+                style={{textAlign: 'center'}}
+              >
+                <COLPrimaryButton
+                  type="submit"
+                >
+                  Continue
+                </COLPrimaryButton>
+              </div>
             </Form>
           )}
           />
-            <div id="mode-group" className="btn-group" data-toggle="buttons" style={{margin: '0 auto 16px auto', display: 'block', textAlign: 'center'}}>
-              <label
-                className={hideMatureClasses}
-              >
-                <input
-                  type="radio"
-                  name="hide"
-                  value="hide-mature"
-                  id="hide-mature-radio"
-                  onClick={() => this.handleUserRating('hide')}
-                />
-                <p className="matureText">Uploading <strong>Family <br/>Friendly </strong>Content</p>
-              </label>
-
-              <label
-                className={showMatureClasses}
-                data-toggle="modal"
-                data-target=".bs-mature-modal-sm"
-              >
-                <input
-                  type="radio"
-                  name="show"
-                  value="show-mature"
-                  id="show-mature-radio"
-                  onClick={() => this.handleUserRating('show')}    
-                />
-                <p className="matureText">Uploading <strong>Mature <br/>Rated </strong>Content</p>
-              </label>
-            </div>
-
-            {/* <label className="switch">
-                <input
-                  className="switch-input"
-                  name="rating"
-                  type="checkbox"
-                  id="all_ages"
-                  checked={onboardingStore.user.rating === 2}
-                  onChange={(e) => this.handleAgeCheck(e)}
-                />
-                <span className="switch-label" data-on="NO" data-off="YES"/>
-                <span className="switch-handle"/>
-            </label> */}
-            {/* <div className="clearfix"/> */}
-
-          <div
-            style={{textAlign: 'center'}}
-          >
-          <COLPrimaryButton
-            type="submit"
-          >
-            Continue
-          </COLPrimaryButton>
-          </div>
-
-          {/* </ValidatorForm> */}
 
           <Dialog
             open={false}
@@ -412,41 +354,6 @@ class Registration extends React.Component<Props, {}> {
               </div>
             </div>
           </Dialog>
-          {/* <Dialog
-            open={store.appropriateContentHelp.show}
-            onClose={() => {
-              onboardingStore.user.rating = 2;
-              store.hideAppropriateContentAlert();
-            }}
-          >
-
-            <div
-              style={{textAlign: 'center'}}
-            >
-              <NSFWPrompt style={{ padding: '16px' }}>
-              Turning this off suggests that you will be uploading content that may include sexually suggestive or adult oriented themes.
-              </NSFWPrompt>
-              <COLClearButton
-                border={true}
-                fullWidth={false}
-                style={{height: '32px', marginTop: '24px'}}
-                onClick={() => store.hideAppropriateContentAlert()}
-              >
-                I agree
-              </COLClearButton><br/>
-              <COLSecondaryButton
-                fullWidth={false}
-                style={{height: '32px', margin: '16px 0'}}
-                onClick={() => {
-                  onboardingStore.user.rating = 2;
-                  store.hideAppropriateContentAlert();
-                }}
-              >
-                Cancel
-              </COLSecondaryButton>
-            </div>
-
-          </Dialog> */}
         </div >
       </div>
 
