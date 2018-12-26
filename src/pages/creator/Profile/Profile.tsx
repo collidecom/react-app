@@ -6,6 +6,7 @@ import 'cropperjs/dist/cropper.css';
 
 import Avatar, { AvatarProps } from '@material-ui/core/Avatar';
 import { IconButton, Dialog, Typography, CircularProgress } from '@material-ui/core';
+import Tooltip from '../../../components/Tooltip/Tooltip';
 import { ReactComponent as QuestionIcon } from '../../../img/question.svg';
 import { ReactComponent as ProfileImagePlaceholder } from '../../../img/add-picture-icon.svg';
 
@@ -180,14 +181,26 @@ export default class Profile extends React.Component<Props, {}> {
         </FlexContainer>
 
         <FlexContainer>
-          <COLInstructionHeader>
+          <COLInstructionHeader style={{marginRight: '8px'}}>
           Add a description
           </COLInstructionHeader>
-          <IconButton
+          <Tooltip
+            title={
+              <>
+              <Typography>
+                This description will be shown on your profile page. 
+                Let Supporters know what you will be doing on Collide and why they should subscribe to you.
+              </Typography>
+              </>
+            }
+          >
+            <QuestionIcon/>
+          </Tooltip>
+          {/* <IconButton
             onClick={() => registrationStore.toggleShowHelp('description')}
           >
             <QuestionIcon/>
-          </IconButton>
+          </IconButton> */}
         </FlexContainer>
         <COLSubHeader>
           Something about yourself so Supporters can get to know you. 
