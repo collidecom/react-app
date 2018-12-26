@@ -136,11 +136,11 @@ class Registration extends React.Component<Props, {}> {
           render={(formikBag: FormikProps<RegisterFormValues>) => (
             <Form>
               <Field
-                name="username"
+                name='username'
                 render={({ field, form }: FieldProps<RegisterFormValues>) => (
                   <>
                     <COLTextField
-                      placeholder="Your Display Name"
+                      placeholder='Your Display Name'
                       fullWidth={true}
                       {...field}
                     />
@@ -153,7 +153,7 @@ class Registration extends React.Component<Props, {}> {
                 )}
               />
               <Field
-                name='email'
+                name='email'                
                 render={({ field, form }: FieldProps<RegisterFormValues>) => (
                   <>
                     <COLTextField

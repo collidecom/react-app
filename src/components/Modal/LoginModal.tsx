@@ -11,6 +11,22 @@ import RootStore from '../../stores/RootStore';
 import { COLTextField } from '../TextField/COLTextField';
 import { createStyles, withStyles } from '@material-ui/core';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
+import { Formik, FormikProps, Form, Field, FieldProps } from 'formik';
+import * as Yup from 'yup';
+import { COLErrorMessage, COLInstructionHeader } from '../Typography/Typography';
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .required('Enter your email')
+    .email('Invalid email'),
+  password: Yup.string()
+    .required('Enter your password')
+    .min(6, 'Must be at least 6 characters'),
+});
+export interface LoginFormValues {
+  email: string;
+  password: string;
+}
 
 const styles = (theme: any) => createStyles({
   root: {
@@ -70,44 +86,76 @@ class LoginModal extends React.Component<Props> {
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{"Log in"}</DialogTitle>
+          {/* <DialogTitle id="responsive-dialog-title">{"Log in"}</DialogTitle> */}
           <DialogContent>
-            <COLTextField
-              name="email"
-              label="Your Email"
-              fullWidth={true}
-              // className={classes.textField}
-              value={authStore.loginFields.email}
-              onChange={(e) => this.handleChange(e)}
-              // margin="normal"
-            />
-            <COLTextField
-              name="password"
-              label="Password"
-              type='password'
-              fullWidth={true}
-              onChange={(e) => this.handleChange(e)}
+
+          <COLInstructionHeader>Log in</COLInstructionHeader>
+            <Formik
+              initialValues={{
+                username: '',
+                email: '',
+                password: '',
+                ageConsent: false,
+                termsAgreed: false,
+                rating: 0,
+              }}
+              validationSchema={LoginSchema}
+              onSubmit={(values: LoginFormValues) => {
+                authStore.login();
+              }}
+              render={(formikBag: FormikProps<LoginFormValues>) => (
+                <Form>
+                  <Field
+                    name='email'
+                    render={({ field, form }: FieldProps<LoginFormValues>) => (
+                      <>
+                        <COLTextField
+                          type='email'
+                          placeholder='Your Email'
+                          fullWidth={true}
+                          {...field}
+                        />
+                        <COLErrorMessage>
+                        {form.touched.email &&
+                          form.errors.email &&
+                          form.errors.email}
+                          </COLErrorMessage>
+                      </>
+                    )}
+                  />
+                  <Field
+                    name='password'
+                    render={({ field, form }: FieldProps<LoginFormValues>) => (
+                      <>
+                        <COLTextField
+                          type='password'
+                          placeholder='Password'
+                          fullWidth={true}
+                          {...field}
+                        />
+                        <COLErrorMessage>
+                        {form.touched.password &&
+                          form.errors.password &&
+                          form.errors.password}
+                          </COLErrorMessage>
+                      </>
+                    )}
+                  />
+
+                  <COLPrimaryButton
+                    type='submit'
+                    fullWidth={false}
+                    style={{margin: 'auto', display: 'block'}}
+                  >
+                  Log in
+                  </COLPrimaryButton>
+
+                </Form>
+              )}
             />
 
-            <COLPrimaryButton
-              onClick={() => authStore.login()}
-            >
-            Log in
-            </COLPrimaryButton>
-
-            {/* <DialogContentText>
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-            </DialogContentText> */}
           </DialogContent>
-          {/* <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Disagree
-            </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
-              Agree
-            </Button>
-          </DialogActions> */}
+
         </Dialog>
       </div>
     );

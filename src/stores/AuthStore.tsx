@@ -40,8 +40,8 @@ export default class AuthStore {
         }).then(() => {
             this.setShowLoginModal(false);
             this.getAccount();
-        }).catch(() => {
-
+        }).catch((error) => {
+            this.rootStore.errorStore.setErrorMessage(error);
         });
     }
 
@@ -49,7 +49,7 @@ export default class AuthStore {
         ApiClient.get('logout').then((response) => {
             this.user = undefined;
         }).catch((error) => {
-
+            this.rootStore.errorStore.setErrorMessage(error);
         });
     }
 
