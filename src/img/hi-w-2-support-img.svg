@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="280" height="192" viewBox="0 0 280 192">
+    <defs>
+        <linearGradient id="a" x1="50%" x2="50%" y1="3.418%" y2="95.175%">
+            <stop offset="0%" stop-color="#CDD2DA" stop-opacity="0"/>
+            <stop offset="26.345%" stop-color="#CDD2DA"/>
+            <stop offset="77.027%" stop-color="#CCD1D9"/>
+            <stop offset="100%" stop-color="#CCD1D9" stop-opacity="0"/>
+        </linearGradient>
+        <rect id="c" width="272" height="59" rx="4"/>
+        <filter id="b" width="105.1%" height="123.7%" x="-2.6%" y="-8.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="url(#a)" d="M28 56C12.536 56 0 43.464 0 28S12.536 0 28 0s28 12.536 28 28-12.536 28-28 28zM72 0h168v16H72V0zm0 24h48v8H72v-8zm56 0h48v8h-48v-8zM72 40h141v16H72V40zM0 153h240v56H0v-56z" transform="translate(21 -7)"/>
+        <g transform="translate(4 68)">
+            <use fill="#000" filter="url(#b)" xlink:href="#c"/>
+            <use fill="#FF6E5F" xlink:href="#c"/>
+        </g>
+        <text fill="#FFF" font-family="MarkOT-Bold, Mark OT" font-size="20" font-weight="bold" transform="translate(4 68)">
+            <tspan x="79" y="36">Support Me</tspan>
+        </text>
+    </g>
+</svg>

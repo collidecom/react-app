@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 interface Props extends ButtonProps {
   dark?: boolean;
+  border?: boolean
 }
 
 const ButtonBase: React.StatelessComponent<Props> = props => (
@@ -25,6 +26,9 @@ const COLTextButton = styled(ButtonBase)`
     &:hover {
       background-color: transparent;
     }
+    border-style: ${(props: Props) => props.border ? 'solid' : 'none'};
+    border-width: ${(props: Props) => props.border ? '1px' : '0'};
+    border-color: ${(props: Props) => props.border ? 'inherit': 'none'};
   }
 `;
 

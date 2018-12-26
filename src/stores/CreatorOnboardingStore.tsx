@@ -11,13 +11,6 @@ import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 // import SocialShareStore from '../pages/creator/SocialShare/SocialShareStore';
 // import BankStore from '../pages/creator/BankInfo/BankStore';
 
-import { AxiosResponse } from 'axios';
-
-const browserHistory = createBrowserHistory();
-const routerStore = new RouterStore();
-
-export const history = syncHistoryWithStore(browserHistory, routerStore);
-
 interface User {
 
     username: string;
@@ -35,7 +28,6 @@ interface User {
 
 export default class CreatorStore {
 
-    routerStore = routerStore;
     // descriptionStore = DescriptionStore;
     // servicesStore: ServicesStore;
     // ratesStore: RatesStore;
@@ -94,7 +86,7 @@ export default class CreatorStore {
         else if (stepModel.path === URLPATHS.CREATOR.uploadVideo.path) {
             this.showedVideo = true;
         }
-        routerStore.push(stepModel.path);
+        // routerStore.push(stepModel.path);
     }
 
     @computed get showProgressBar() {
@@ -169,70 +161,70 @@ export default class CreatorStore {
 
     @action register() {
 
-        this.loading = true;
+        // this.loading = true;
 
-        var self = this;
+        // var self = this;
 
-        var params: any = {
-            email: this.user.email,
-            password: this.user.password,
-            username: this.user.username,
-            terms_agree: '1',
-            gender: 'MALE',
-            birth_date: '2000-01-01',
-        };
+        // var params: any = {
+        //     email: this.user.email,
+        //     password: this.user.password,
+        //     username: this.user.username,
+        //     terms_agree: '1',
+        //     gender: 'MALE',
+        //     birth_date: '2000-01-01',
+        // };
 
-        // Workaround for rating somehow being set to 0
-        var rating = this.user.rating;
-        if (rating === 0) {
-            const storageRatingString = sessionStorage.getItem('rating');
-            if (storageRatingString) {
-                const storageRatingInt = parseInt(storageRatingString, 0);
-                if (storageRatingInt === 0 || storageRatingInt === 1 || storageRatingInt === 2) {
-                    rating = storageRatingInt;
-                }
-            }
+        // // Workaround for rating somehow being set to 0
+        // var rating = this.user.rating;
+        // if (rating === 0) {
+        //     const storageRatingString = sessionStorage.getItem('rating');
+        //     if (storageRatingString) {
+        //         const storageRatingInt = parseInt(storageRatingString, 0);
+        //         if (storageRatingInt === 0 || storageRatingInt === 1 || storageRatingInt === 2) {
+        //             rating = storageRatingInt;
+        //         }
+        //     }
     
-        }
-        else if (rating === 2) {
-            // Send up allAges if user does NOT want to see mature content. Send up nothing for mature content
-            params.allAges = true;
-        }
+        // }
+        // else if (rating === 2) {
+        //     // Send up allAges if user does NOT want to see mature content. Send up nothing for mature content
+        //     params.allAges = true;
+        // }
 
-        ApiClient.post('register_form', params).then(() => {
+        // ApiClient.post('register_form', params).then(() => {
 
-            ApiClient.get('account').then(() => {
-                ApiClient.postWithProgress('user/star_form', {
-                                conditions: 'on',
-                                profile_name: this.user.username,
-                                about_me: this.user.aboutMe,
-                                profile_picture_file: this.user.croppedImageURL || this.user.profileImageURL,
-                                chat_filter: this.user.rating,
-                                onboarding_string: this.onboarding_string
-                                }, (callback: any) => {
-                                    console.log(callback);
-                                }).then((response: AxiosResponse) => {         
-                                    if (response.data && response.data.data && response.data.data.profile) {
-                                        if (response.data.data.profile) {
+        //     ApiClient.get('account').then(() => {
+        //         ApiClient.postWithProgress('user/star_form', {
+        //                         conditions: 'on',
+        //                         profile_name: this.user.username,
+        //                         about_me: this.user.aboutMe,
+        //                         profile_picture_file: this.user.croppedImageURL || this.user.profileImageURL,
+        //                         chat_filter: this.user.rating,
+        //                         onboarding_string: this.onboarding_string
+        //                         }, (callback: any) => {
+        //                             console.log(callback);
+        //                         }).then((response: AxiosResponse) => {         
+        //                             if (response.data && response.data.data && response.data.data.profile) {
+        //                                 if (response.data.data.profile) {
                                             
-                                            self.user.profile_name_url = response.data.data.profile;
-                                            self.user.profile = (response.data.data.profile).replace('/', '');
-                                        }
-                                    }  
-                                    self.cropping = false;
-                                    self.loading = false;
-                                    self.push(URLPATHS.CREATOR.checkpoint);
-                }).catch((error: string) => {
-                    self.error = error;
-                    self.loading = false;
-                });
-            });
-        })
-        .catch((error: string) => {
-            self.loading = false;
-            self.error = error;
-            // this.routerStore.goBack();
-        });
+        //                                     self.user.profile_name_url = response.data.data.profile;
+        //                                     self.user.profile = (response.data.data.profile).replace('/', '');
+        //                                 }
+        //                             }  
+        //                             self.cropping = false;
+        //                             self.loading = false;
+        //                             self.push(URLPATHS.CREATOR.checkpoint);
+        //         }).catch((error: string) => {
+        //             self.error = error;
+        //             self.loading = false;
+        //         });
+        //     });
+        // })
+        // .catch((error: string) => {
+        //     self.loading = false;
+        //     self.error = error;
+        //     // this.routerStore.goBack();
+        // });
 
     }
 

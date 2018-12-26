@@ -3,7 +3,7 @@ import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
 import PostModel from '../models/PostModel';
 import SupporterStore from './SupporterStore';
-import CreatorStore from './CreatorStore';
+import CreatorStore from './CreatorOnboardingStore';
 
 export default class OnboardingStore {
 

@@ -48,7 +48,7 @@ class App extends Component<Props> {
               <Switch>
                 <Route exact={true} path='/' component={LandingPage} />
                 <Route exact={true} path='/app' component={Home} />
-                <Route exact={true} path='/creator/onboard/signup' component={AppCreator} /> 
+                <Route path='/creator/onboard/signup' component={AppCreator} /> 
               </Switch>
             </div>
             <LoginModal/>

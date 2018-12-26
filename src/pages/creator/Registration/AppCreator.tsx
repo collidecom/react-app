@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router';
 import Registration from './Registration';
 import RootStore from '../../../stores/RootStore';
 import Typography from '../../../components/Typography/Typography';
+import Profile from '../Profile/Profile';
 
 interface Props {
 
@@ -70,7 +71,8 @@ class App extends React.Component<Props, {}> {
                     </div>
                     <div className='pageContainer'>
                         <Switch>
-                            <Route exact={true} path='' component={Registration} />
+                            {/* <Route exact={true} path='' component={Registration} /> */}
+                            <Route exact={true} path='' component={Profile} />
                         </Switch>
                     </div>
                 </div>

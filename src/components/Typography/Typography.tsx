@@ -1,7 +1,7 @@
 import * as React from 'react';
 import MuiTypography, { TypographyProps } from '@material-ui/core/Typography';
 import styled from 'styled-components';
-import { orangeColor } from '../../util/theme';
+import { orangeColor, grayTextColor } from '../../util/theme';
 
 const Typography: React.StatelessComponent<TypographyProps> = props => (
     <MuiTypography
@@ -19,6 +19,23 @@ export const COLHeader = styled(Typography)`
     text-align: ${props => props.align || 'inherit'};
   }
 `;
+
+export const COLInstructionHeader = styled(Typography)`
+  && {
+    font-size: 18px;
+    font-family: MarkOT-Medium;
+  }
+`;
+
+export const COLSubHeader = styled(Typography)`
+  && {
+    font-size: 16px;
+    font-family: MarkOT-Medium;
+    text-align: ${props => props.align || 'inherit'};
+    color: ${grayTextColor};
+  }
+`;
+
 
 export const COLErrorMessage = styled(Typography)`
   && {

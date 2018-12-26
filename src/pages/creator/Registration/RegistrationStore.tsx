@@ -7,7 +7,23 @@ import { URLPATHS } from '../../../util/URLPaths';
 export default class RegistrationStore {
 
     rootStore: RootStore;
-    
+
+    @observable aboutMe = '';
+    @observable croppedImageURL?: string = undefined;
+    @observable profileImageURL?: string = undefined;
+    @observable cropping = false;
+    @observable loading = false;
+
+    @observable showHelp = {
+        age: false,
+        description: false,
+    };
+
+    @observable appropriateContentHelp = {
+        show: false,
+        showed: false
+    };
+
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
     }
@@ -30,4 +46,37 @@ export default class RegistrationStore {
         });
 
     }
+
+    @action toggleShowHelp = (name: 'age' | 'description') => {
+        this.showHelp[name] = !this.showHelp[name];
+    }
+
+    @action showAppropriateContentAlert() {
+        this.appropriateContentHelp.show = true;
+        this.appropriateContentHelp.showed = true;
+    }
+
+    @action hideAppropriateContentAlert() {
+        this.appropriateContentHelp.show = false;
+    }
+
+    @action selectImage = (imageURL: string) => {
+        this.croppedImageURL = undefined;
+        this.profileImageURL = undefined;
+        this.profileImageURL = imageURL;
+    }
+
+    @action cropImage = (imageURL: string) => {
+        this.croppedImageURL = imageURL;
+        this.cropping = false;
+    }
+    
+    @action toggleCropping = () => {
+        this.cropping = !this.cropping;
+    }
+
+    @action setredirectToApp() {
+        // this.redirectToApp = true;
+    }
+
 }
