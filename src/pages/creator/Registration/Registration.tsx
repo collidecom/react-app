@@ -13,6 +13,7 @@ import COLTextButton from '../../../components/Button/COLTextButton';
 import COLUnderlinedButton from '../../../components/Button/COLUnderlinedButton';
 import RootStore from '../../../stores/RootStore';
 import { COLHeader, COLErrorMessage } from '../../../components/Typography/Typography';
+import Tooltip from '../../../components/Tooltip/Tooltip';
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string()
@@ -206,7 +207,17 @@ class Registration extends React.Component<Props, {}> {
                       }
                       label={<span style={textStyle}>I am at least 13</span>}
                     />
-                    <COLUnderlinedButton>Why?</COLUnderlinedButton>
+                    <Tooltip
+                      title={
+                        <>
+                        <Typography>
+                        Collide requires all users to be at least 13 years old before they can register an account.
+                        </Typography>
+                        </>
+                      }
+                    >
+                      <COLUnderlinedButton>Why?</COLUnderlinedButton>
+                    </Tooltip>
                     {form.touched.ageConsent &&
                       form.errors.ageConsent &&
                       <COLErrorMessage>

@@ -71,8 +71,8 @@ class App extends React.Component<Props, {}> {
                     </div>
                     <div className='pageContainer'>
                         <Switch>
-                            {/* <Route exact={true} path='' component={Registration} /> */}
-                            <Route exact={true} path='' component={Profile} />
+                            <Route exact={true} path='' component={Registration} />
+                            {/* <Route exact={true} path='' component={Profile} /> */}
                         </Switch>
                     </div>
                 </div>
