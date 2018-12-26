@@ -20,6 +20,7 @@ import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
 import VideoChatModel from '../../models/VideoChatModel';
 import StarChatRequest from '../../models/StarChatRequest';
+import Link from '../Link/Link';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
@@ -256,6 +257,11 @@ class NavBar extends React.Component<Props> {
               >
                 <img src='https://assets.collide.com/img/betalogo.svg'/>
               </LogoButton>
+              <Link to='/creator/onboard/signup'>
+              <COLTextButton>
+                Creator sign up
+              </COLTextButton>
+              </Link>
               {/* <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
