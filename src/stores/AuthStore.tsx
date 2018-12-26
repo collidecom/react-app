@@ -22,7 +22,7 @@ export default class AuthStore {
         ApiClient.get('account').then((response) => {
             this.user = response.data.account;
             this.isLoadingAccount = false;
-        }).catch((error) => {
+        }).catch(() => {
             // not logged in, redirect to / ?
             this.isLoadingAccount = false;
         });
@@ -44,7 +44,7 @@ export default class AuthStore {
     }
 
     @action logout = () => {
-        ApiClient.get('logout').then((response) => {
+        ApiClient.get('logout').then(() => {
             this.user = undefined;
         }).catch((error) => {
             this.rootStore.errorStore.setErrorMessage(error);
