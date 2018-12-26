@@ -1,6 +1,7 @@
 import { RouterStore } from 'mobx-react-router';
 import { action } from 'mobx';
 import AuthStore from './AuthStore';
+import NavBarStore from '../components/NavBar/NavBarStore';
 import HomeSupporterStore from '../pages/Home/HomeSupporterStore';
 import AccessStore from './AccessStore';
 import PostStore from './PostStore';
@@ -10,11 +11,13 @@ import MediaStore from './MediaStore';
 import VideoChatRequestStore from './VideoChatRequestStore';
 import ErrorStore from './ErrorStore';
 import VideoChatStore from './VideoChatStore';
+import RegistrationStore from '../pages/creator/Registration/RegistrationStore';
 
 export default class RootStore {
 
     routerStore: RouterStore;
     authStore: AuthStore;
+    navBarStore: NavBarStore;
     homeSupporterStore: HomeSupporterStore;
     homeCreatorStore: HomeCreatorStore;
     accessStore: AccessStore;
@@ -25,10 +28,14 @@ export default class RootStore {
     videoChatStore: VideoChatStore;
     errorStore: ErrorStore;
 
+    // onboarding
+    registrationStore: RegistrationStore;
+
     constructor() {
 
         this.routerStore = new RouterStore();
         this.authStore = new AuthStore(this);
+        this.navBarStore = new NavBarStore(this);
         this.homeSupporterStore = new HomeSupporterStore(this);
         this.homeCreatorStore = new HomeCreatorStore(this);
         this.accessStore = new AccessStore(this);
@@ -38,6 +45,8 @@ export default class RootStore {
         this.videoChatRequestStore = new VideoChatRequestStore(this);
         this.videoChatStore = new VideoChatStore(this);
         this.errorStore = new ErrorStore(this);
+
+        this.registrationStore = new RegistrationStore(this);
 
     }
 

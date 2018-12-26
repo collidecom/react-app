@@ -20,6 +20,7 @@ import Typography from '../Typography/Typography';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
 import VideoChatModel from '../../models/VideoChatModel';
 import StarChatRequest from '../../models/StarChatRequest';
+import Link from '../Link/Link';
 const CreditsIcon = require('../../img/icon-credits.svg') as string;
 
 const LogoButton = styled(Button as React.SFC<ButtonProps>)`
@@ -172,7 +173,7 @@ class NavBar extends React.Component<Props> {
   render() {
 
     const { rootStore } = this.injected;
-    const { authStore, videoChatRequestStore } = rootStore;
+    const { authStore, navBarStore, videoChatRequestStore } = rootStore;
     
     const { vchatAnchorEl, anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
@@ -244,66 +245,76 @@ class NavBar extends React.Component<Props> {
     );
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar classes={{
-            root:  classes.toolbarRoot
-          }}>
-            <LogoButton
-              onClick={() => rootStore.goHome()}
-            >
-              <img src='https://assets.collide.com/img/betalogo.svg'/>
-            </LogoButton>
-            {/* <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+      <div>
+        {navBarStore.showNavBar &&
+          <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar classes={{
+              root:  classes.toolbarRoot
+            }}>
+              <LogoButton
+                onClick={() => rootStore.goHome()}
+              >
+                <img src='https://assets.collide.com/img/betalogo.svg'/>
+              </LogoButton>
+              <Link to='/creator/onboard/signup'>
+              <COLTextButton>
+                Creator sign up
+              </COLTextButton>
+              </Link>
+              {/* <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                />
+              </div> */}
+              <div className={classes.grow} />
+              <div className={classes.sectionDesktop}>
+                <Fab size='small' color='primary' onClick={this.handleVchatMenuOpen}>{videoChatRequestStore.requests.length}</Fab>
+                {authStore.isLoggedIn && !authStore.isStar &&
+                  <COLTextButton>
+                    <img src={CreditsIcon} style={{marginRight: '8px'}}/>
+                    <Typography variant='body2'>{authStore.credits()}</Typography>                  
+                  </COLTextButton>
+                }
+  
+                {authStore.isLoggedIn &&
+                  <COLTextButton
+                    aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuOpen}
+                  >
+                    {(authStore.user && (authStore.user.display_name || authStore.user!.profile_name))}
+                  </COLTextButton>
+                }
+                {!authStore.isLoggedIn &&
+                  <COLTextButton
+                    onClick={this.handleClickOpen}
+                  >
+                    Log in
+                  </COLTextButton>
+                }
+                
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div> */}
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <Fab size='small' color='primary' onClick={this.handleVchatMenuOpen}>{videoChatRequestStore.requests.length}</Fab>
-              {authStore.isLoggedIn && !authStore.isStar &&
-                <COLTextButton>
-                  <img src={CreditsIcon} style={{marginRight: '8px'}}/>
-                  <Typography variant='body2'>{authStore.credits()}</Typography>                  
-                </COLTextButton>
-              }
-
-              {authStore.isLoggedIn &&
-                <COLTextButton
-                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleProfileMenuOpen}
-                >
-                  {(authStore.user && (authStore.user.display_name || authStore.user!.profile_name))}
-                </COLTextButton>
-              }
-              {!authStore.isLoggedIn &&
-                <COLTextButton
-                  onClick={this.handleClickOpen}
-                >
-                  Log in
-                </COLTextButton>
-              }
-              
-            </div>
-            <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                <MoreIcon />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-        {renderVchatMenu}
-        {renderMenu}
-        {renderMobileMenu}
+              <div className={classes.sectionMobile}>
+                <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </Toolbar>
+          </AppBar>
+          {renderVchatMenu}
+          {renderMenu}
+          {renderMobileMenu}
+        </div>
+        }
+      
       </div>
     );
   }

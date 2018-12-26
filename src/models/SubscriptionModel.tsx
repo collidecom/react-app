@@ -1,10 +1,10 @@
-
-
-export default interface SubscriptionModel {
-
+export default interface Subscription {
     id: number;
-    type: string;
-    // profile_name_url: string;
-    // profile_image: string;
-    
+    name: string;
+    credits_price: number;
+    duration: number;
+    duration_str: string;
+    type: 'MEDIA' | 'PATRON';
+    custom: 'YES' | 'NO';
+    dollarPrice: string;
 }
