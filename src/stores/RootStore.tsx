@@ -13,6 +13,7 @@ import ErrorStore from './ErrorStore';
 import VideoChatStore from './VideoChatStore';
 import RegistrationStore from '../pages/creator/Registration/RegistrationStore';
 import LoginModalStore from './LoginModalStore';
+import CreatorProfileStore from '../pages/Profile/CreatorProfileStore';
 
 export default class RootStore {
 
@@ -20,8 +21,11 @@ export default class RootStore {
     authStore: AuthStore;
     loginModalStore: LoginModalStore;
     navBarStore: NavBarStore;
+
+    creatorProfileStore: CreatorProfileStore;
     homeSupporterStore: HomeSupporterStore;
     homeCreatorStore: HomeCreatorStore;
+
     accessStore: AccessStore;
     postStore: PostStore;
     playerStore: PlayerStore;
@@ -39,8 +43,11 @@ export default class RootStore {
         this.authStore = new AuthStore(this);
         this.loginModalStore = new LoginModalStore(this);
         this.navBarStore = new NavBarStore(this);
+
+        this.creatorProfileStore = new CreatorProfileStore(this);
         this.homeSupporterStore = new HomeSupporterStore(this);
         this.homeCreatorStore = new HomeCreatorStore(this);
+
         this.accessStore = new AccessStore(this);
         this.postStore = new PostStore(this);
         this.playerStore = new PlayerStore(this);

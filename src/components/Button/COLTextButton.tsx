@@ -16,7 +16,7 @@ const ButtonBase: React.StatelessComponent<Props> = props => (
   </Button>
 );
 
-const COLTextButton = styled(ButtonBase)`
+const COLTextButton = styled(ButtonBase as React.SFC<Props>)`
   && { 
     font-size: 14px;
     font-family: MarkOT;

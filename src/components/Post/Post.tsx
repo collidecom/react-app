@@ -48,6 +48,7 @@ export const Post: React.SFC<PostProps> = inject('rootStore')(observer((props) =
             </StyledLink>
             <br />
             <COLTextButton
+                fullWidth={true}
                 onClick={() => {
                     mediaStore.getMedia(post.post_media_content.id);
                     // ApiClient.get(`media/${post.post_media_content.id}`).then((media) => {

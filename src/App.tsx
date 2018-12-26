@@ -16,6 +16,7 @@ import ErrorModal from './components/Modal/ErrorModal';
 import VideoChatModal from './pages/VideoChat/VideoChatModal';
 import Registration from './pages/creator/Registration/Registration';
 import AppCreator from './pages/creator/Registration/AppCreator';
+import CreatorProfile from './pages/Profile/CreatorProfile';
 
 interface Props extends RouteComponentProps<{}> {
 
@@ -46,9 +47,10 @@ class App extends Component<Props> {
             <NavBar/>
             <div style={{marginTop: '32px'}}>
               <Switch>
-                <Route exact={true} path='/' component={LandingPage} />
                 <Route exact={true} path='/app' component={Home} />
                 <Route path='/creator/onboard/signup' component={AppCreator} /> 
+                <Route path='/' component={CreatorProfile} />
+
               </Switch>
             </div>
             <LoginModal/>
