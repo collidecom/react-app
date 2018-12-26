@@ -3,6 +3,7 @@ import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
 import UserModel, { AccountType } from '../models/UserModel';
 import { convertCreditsToDollars } from '../util/Credits';
+import { LoginFormValues } from '../components/Modal/LoginModal';
 
 export default class AuthStore {
 
@@ -11,11 +12,6 @@ export default class AuthStore {
     @observable isLoadingAccount = false;
     @observable user?: UserModel = undefined; 
     @observable showLoginModal = false;
-    
-    @observable loginFields: any = {
-        email: '',
-        password: '',
-    }
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -32,11 +28,13 @@ export default class AuthStore {
         });
     }
 
-    @action login = () => {
+    @action login = (values: LoginFormValues) => {
+
+        const { email, password } = values;
 
         ApiClient.get('login', {
-            email: this.loginFields.email,
-            password: this.loginFields.password
+            email: email,
+            password: password,
         }).then(() => {
             this.setShowLoginModal(false);
             this.getAccount();
@@ -83,8 +81,4 @@ export default class AuthStore {
         this.showLoginModal = show;
     }
 
-    @action setLoginField = (name: string, value: string) => {
-
-        this.loginFields[name] = value;
-    }
 }

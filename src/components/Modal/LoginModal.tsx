@@ -60,14 +60,6 @@ class LoginModal extends React.Component<Props> {
 
   };
 
-  handleChange = (event: any) => {
-
-    const { rootStore } = this.injected;
-    const { authStore } = rootStore;
-    authStore.setLoginField(event.currentTarget.name, event.currentTarget.value);
-    
-  }
-
   render() {
     const { fullScreen } = this.props;
     const { classes } = this.props;
@@ -102,7 +94,7 @@ class LoginModal extends React.Component<Props> {
               }}
               validationSchema={LoginSchema}
               onSubmit={(values: LoginFormValues) => {
-                authStore.login();
+                authStore.login(values);
               }}
               render={(formikBag: FormikProps<LoginFormValues>) => (
                 <Form>
