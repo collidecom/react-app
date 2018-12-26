@@ -14,7 +14,7 @@ import COLPrimaryButton from '../Button/COLPrimaryButton';
 
 const styles = (theme: any) => createStyles({
   root: {
-    padding: '40px',
+    // padding: '16px',
   },
 });
 interface Props {
