@@ -31,6 +31,7 @@ export interface LoginFormValues {
 const styles = (theme: any) => createStyles({
   root: {
     // padding: '16px',
+    maxWidth: '400px'
   },
 });
 interface Props {
