@@ -12,11 +12,13 @@ import VideoChatRequestStore from './VideoChatRequestStore';
 import ErrorStore from './ErrorStore';
 import VideoChatStore from './VideoChatStore';
 import RegistrationStore from '../pages/creator/Registration/RegistrationStore';
+import LoginModalStore from './LoginModalStore';
 
 export default class RootStore {
 
     routerStore: RouterStore;
     authStore: AuthStore;
+    loginModalStore: LoginModalStore;
     navBarStore: NavBarStore;
     homeSupporterStore: HomeSupporterStore;
     homeCreatorStore: HomeCreatorStore;
@@ -35,6 +37,7 @@ export default class RootStore {
 
         this.routerStore = new RouterStore();
         this.authStore = new AuthStore(this);
+        this.loginModalStore = new LoginModalStore(this);
         this.navBarStore = new NavBarStore(this);
         this.homeSupporterStore = new HomeSupporterStore(this);
         this.homeCreatorStore = new HomeCreatorStore(this);

@@ -3,6 +3,7 @@ import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
 import UserModel, { AccountType } from '../models/UserModel';
 import { convertCreditsToDollars } from '../util/Credits';
+import { LoginFormValues } from '../components/Modal/LoginModal';
 
 export default class AuthStore {
 
@@ -11,11 +12,6 @@ export default class AuthStore {
     @observable isLoadingAccount = false;
     @observable user?: UserModel = undefined; 
     @observable showLoginModal = false;
-    
-    @observable loginFields: any = {
-        email: '',
-        password: '',
-    }
 
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -26,30 +22,32 @@ export default class AuthStore {
         ApiClient.get('account').then((response) => {
             this.user = response.data.account;
             this.isLoadingAccount = false;
-        }).catch((error) => {
+        }).catch(() => {
             // not logged in, redirect to / ?
             this.isLoadingAccount = false;
         });
     }
 
-    @action login = () => {
+    @action login = (values: LoginFormValues) => {
+
+        const { email, password } = values;
 
         ApiClient.get('login', {
-            email: this.loginFields.email,
-            password: this.loginFields.password
+            email: email,
+            password: password,
         }).then(() => {
             this.setShowLoginModal(false);
             this.getAccount();
-        }).catch(() => {
-
+        }).catch((error) => {
+            this.rootStore.errorStore.setErrorMessage(error);
         });
     }
 
     @action logout = () => {
-        ApiClient.get('logout').then((response) => {
+        ApiClient.get('logout').then(() => {
             this.user = undefined;
         }).catch((error) => {
-
+            this.rootStore.errorStore.setErrorMessage(error);
         });
     }
 
@@ -83,8 +81,4 @@ export default class AuthStore {
         this.showLoginModal = show;
     }
 
-    @action setLoginField = (name: string, value: string) => {
-
-        this.loginFields[name] = value;
-    }
 }
