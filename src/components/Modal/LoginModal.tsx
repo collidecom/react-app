@@ -9,11 +9,13 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import { COLTextField } from '../TextField/COLTextField';
-import { createStyles, withStyles } from '@material-ui/core';
+import { createStyles, withStyles, AppBar, Tabs, Tab, Divider } from '@material-ui/core';
 import COLPrimaryButton from '../Button/COLPrimaryButton';
 import { Formik, FormikProps, Form, Field, FieldProps } from 'formik';
 import * as Yup from 'yup';
 import { COLErrorMessage, COLInstructionHeader } from '../Typography/Typography';
+import styled, { charcoalGrayColor } from '../../util/theme';
+import { TabProps } from '@material-ui/core/Tab';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -31,9 +33,19 @@ export interface LoginFormValues {
 const styles = (theme: any) => createStyles({
   root: {
     // padding: '16px',
-    maxWidth: '400px'
+    maxWidth: '400px',
+    minHeight: '600px'
   },
 });
+
+const StyledTab = styled(Tab as React.SFC<TabProps>)`
+    && {
+        font-size: 16px;
+        font-family: MarkOT-Medium;
+        color: ${charcoalGrayColor};
+        text-transform: none;
+    }
+`;
 interface Props {
     fullScreen?: boolean,
     classes?: any,
@@ -65,7 +77,8 @@ class LoginModal extends React.Component<Props> {
     const { classes } = this.props;
 
     const { rootStore } = this.injected;
-    const { authStore } = rootStore;
+    const { authStore, loginModalStore } = rootStore;
+    const { selectedTab } = loginModalStore;
 
     return (
       <div>
@@ -79,73 +92,96 @@ class LoginModal extends React.Component<Props> {
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          {/* <DialogTitle id="responsive-dialog-title">{"Log in"}</DialogTitle> */}
           <DialogContent>
 
-          <COLInstructionHeader>Log in</COLInstructionHeader>
-            <Formik
-              initialValues={{
-                username: '',
-                email: '',
-                password: '',
-                ageConsent: false,
-                termsAgreed: false,
-                rating: 0,
+          <div>
+            <Tabs
+              color='secondary'
+              indicatorColor='primary'
+              value={selectedTab}
+              fullWidth
+              onChange={(e, value) => {
+                loginModalStore.setSelectedTab(value);
               }}
-              validationSchema={LoginSchema}
-              onSubmit={(values: LoginFormValues) => {
-                authStore.login(values);
-              }}
-              render={(formikBag: FormikProps<LoginFormValues>) => (
-                <Form>
-                  <Field
-                    name='email'
-                    render={({ field, form }: FieldProps<LoginFormValues>) => (
-                      <>
-                        <COLTextField
-                          type='email'
-                          placeholder='Your Email'
-                          fullWidth={true}
-                          {...field}
-                        />
-                        <COLErrorMessage>
-                        {form.touched.email &&
-                          form.errors.email &&
-                          form.errors.email}
-                          </COLErrorMessage>
-                      </>
-                    )}
-                  />
-                  <Field
-                    name='password'
-                    render={({ field, form }: FieldProps<LoginFormValues>) => (
-                      <>
-                        <COLTextField
-                          type='password'
-                          placeholder='Password'
-                          fullWidth={true}
-                          {...field}
-                        />
-                        <COLErrorMessage>
-                        {form.touched.password &&
-                          form.errors.password &&
-                          form.errors.password}
-                          </COLErrorMessage>
-                      </>
-                    )}
-                  />
+            >
+              <StyledTab label='Sign up' />
+              <StyledTab label='Log in' />
+            </Tabs>
+          </div>
+          <Divider
+            style={{marginBottom: '32px'}}
+          />
+          {selectedTab === 0 &&
+          <div>Supporter sign up component here</div>
+          }
+          {selectedTab === 1 &&
+            <>
+              <COLInstructionHeader>Log in</COLInstructionHeader>
+                <Formik
+                  initialValues={{
+                    username: '',
+                    email: '',
+                    password: '',
+                    ageConsent: false,
+                    termsAgreed: false,
+                    rating: 0,
+                  }}
+                  validationSchema={LoginSchema}
+                  onSubmit={(values: LoginFormValues) => {
+                    authStore.login(values);
+                  }}
+                  render={(formikBag: FormikProps<LoginFormValues>) => (
+                    <Form>
+                      <Field
+                        name='email'
+                        render={({ field, form }: FieldProps<LoginFormValues>) => (
+                          <>
+                            <COLTextField
+                              type='email'
+                              placeholder='Your Email'
+                              fullWidth={true}
+                              {...field}
+                            />
+                            <COLErrorMessage>
+                            {form.touched.email &&
+                              form.errors.email &&
+                              form.errors.email}
+                              </COLErrorMessage>
+                          </>
+                        )}
+                      />
+                      <Field
+                        name='password'
+                        render={({ field, form }: FieldProps<LoginFormValues>) => (
+                          <>
+                            <COLTextField
+                              type='password'
+                              placeholder='Password'
+                              fullWidth={true}
+                              {...field}
+                            />
+                            <COLErrorMessage>
+                            {form.touched.password &&
+                              form.errors.password &&
+                              form.errors.password}
+                              </COLErrorMessage>
+                          </>
+                        )}
+                      />
 
-                  <COLPrimaryButton
-                    type='submit'
-                    fullWidth={false}
-                    style={{margin: 'auto', display: 'block'}}
-                  >
-                  Log in
-                  </COLPrimaryButton>
+                      <COLPrimaryButton
+                        type='submit'
+                        fullWidth={false}
+                        style={{margin: 'auto', display: 'block'}}
+                      >
+                      Log in
+                      </COLPrimaryButton>
 
-                </Form>
-              )}
-            />
+                    </Form>
+                  )}
+                />
+              </>
+            }
 
           </DialogContent>
 
