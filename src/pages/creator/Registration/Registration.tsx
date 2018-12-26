@@ -31,13 +31,13 @@ const RegisterSchema = Yup.object().shape({
   rating: Yup.number()
     .min(1, 'Select mature rating'),
 });
-interface RegisterFormValues {
+export interface RegisterFormValues {
   username: string;
   email: string;
   password: string;
   ageConsent: boolean;
   termsAgreed: boolean;
-  rating: number;
+  rating: 0 | 1 | 2;
 }
 const textStyle = {
   color: '#aab2bd',
@@ -129,7 +129,7 @@ class Registration extends React.Component<Props, {}> {
           validationSchema={RegisterSchema}
           onSubmit={(values: RegisterFormValues) => {
             // local validation passed. make server calls for final validation
-            registrationStore.checkDuplicate(values.username, values.email);
+            registrationStore.setValues(values);
 
           }}
           render={(formikBag: FormikProps<RegisterFormValues>) => (

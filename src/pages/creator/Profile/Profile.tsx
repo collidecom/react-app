@@ -25,7 +25,7 @@ const ProfileSchema = Yup.object().shape({
     .required('Enter your description')
     .min(3, 'Must be at least 3 characters'),
 });
-interface ProfileFormValues {
+export interface ProfileFormValues {
   aboutMe: string;
 }
 const AvatarContainer = styled.div`
@@ -198,9 +198,7 @@ export default class Profile extends React.Component<Props, {}> {
           }}
           validationSchema={ProfileSchema}
           onSubmit={(values: ProfileFormValues) => {
-            // local validation passed. make server calls for final validation
-            // registrationStore.checkDuplicate(values.username, values.email);
-
+            registrationStore.register();
           }}
           render={(formikBag: FormikProps<ProfileFormValues>) => (
             <Form>
