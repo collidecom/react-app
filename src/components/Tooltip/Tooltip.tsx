@@ -20,7 +20,6 @@ interface Props extends TooltipProps {
 const Tooltip = (props: Props) => (
     <MuiTooltip
         {...props}
-        leaveDelay={100000}
         disableTouchListener    // Default behavior on touch devices is long press to show tooltip.
         classes={{ popper: props.classes.popper, tooltip: props.classes.lightTooltip }}
     >
