@@ -4,6 +4,7 @@ import { observable, action } from 'mobx';
 import ApiClient from '../../util/ApiClient';
 import PostModel, { filterUnprocessedPosts } from '../../models/PostModel';
 import StarModel from '../../models/StarModel';
+import MediaModel from '../../models/MediaModel';
 
 export enum CreatorProfileTab {
     INFO,
@@ -18,7 +19,8 @@ export default class ProfileStore {
     @observable star?: StarModel = undefined;
     @observable isFetching = false;
     @observable postsArray: PostModel[] = [];
-    @observable selectedTab: CreatorProfileTab = CreatorProfileTab.INFO;
+    @observable libraryArray: MediaModel[] = [];
+    @observable selectedTab: CreatorProfileTab = CreatorProfileTab.LIBRARY;
 
     // prevent multiple follow/unfollow clicks
     @observable isAttemptingFollow = false;
@@ -43,6 +45,7 @@ export default class ProfileStore {
                 const mergedStar = Object.assign(starResponse.data.star, starMeResponse.data.star);
                 this.star = mergedStar;
                 this.fetchInitialPosts();
+                this.fetchInitialLibraries();
             }
 
         }).catch((error) => {
@@ -74,24 +77,30 @@ export default class ProfileStore {
 
     }
 
-    @action fetchPosts = () => {
+    @action fetchInitialLibraries = () => {
 
-        this.isFetching = true;
-        const params = {
-            web: 1,
-            offset: this.postsArray.length,
-            limit: 10
-        };
-    
-        ApiClient.get('feed/posts', params).then((response) => {
-            const fetchedArray = response.data.favorites_posts;
-            this.postsArray = this.postsArray.slice().concat(fetchedArray);
-            this.isFetching = false;
+        if (this.star) {
 
-        }).catch((error) => {
-            console.log(error);
-            this.isFetching = true;
-        });
+            const params = {
+                web: 1,
+                offset: 0,
+                limit: 10
+            }
+
+            const starId = this.star.id;
+            ApiClient.get('star/' + starId + '/library', params).then((response) => {
+
+                const fetchedArray = response.data.star.library;
+                this.libraryArray = fetchedArray;
+
+                // if (response.data && response.data.star && response.data.star.library) {
+                //     setupLibrary(response.data.star.library);
+                // }
+                // isFetchingStarLibraries = false;
+            }).catch((error) => {
+                this.rootStore.errorStore.setErrorMessage(error);
+            })
+        }
     }
 
     @action follow = (star: StarModel) => {

@@ -13,6 +13,7 @@ import Link from '../../components/Link/Link';
 import CreatorHeader from '../../components/CreatorHeader/CreatorHeader';
 import styled, { charcoalGrayColor } from '../../util/theme';
 import { TabProps } from '@material-ui/core/Tab';
+import Library from '../../components/Post/Library';
 
 const StyledTab = styled(Tab as React.SFC<TabProps>)`
     && {
@@ -100,7 +101,7 @@ export default class CreatorProfile extends React.Component<Props> {
                             }
                             {creatorProfileStore.selectedTab === CreatorProfileTab.POSTS &&
                                 <>
-                                {creatorProfileStore.postsArray.map((post: PostModel, index) =>
+                                {creatorProfileStore.postsArray.map((post, index) =>
                                     <div key={post.post_id}>
                                         <Post
                                             post={post}
@@ -114,7 +115,19 @@ export default class CreatorProfile extends React.Component<Props> {
                                 {creatorProfileStore.isFetching && <p>FETCHING MORE...</p>}
                                 </>
                             }
-                            
+                            {creatorProfileStore.selectedTab === CreatorProfileTab.LIBRARY &&
+                                <Grid container spacing={24}>
+                                {creatorProfileStore.libraryArray.map((media, index) =>
+                                    <Grid item md={4} key={media.id}>
+                                        <Library
+                                            media={media}
+                                            star={star}
+                                            access={rootStore.accessStore.accessMedia(star, undefined, media)}
+                                        />
+                                    </Grid>
+                                )}
+                                </Grid>
+                            }
                         </Paper>
                     </Grid>
                     <Hidden mdDown>
