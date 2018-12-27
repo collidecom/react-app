@@ -34,7 +34,7 @@ export default class ProfileStore {
     @action getStar = (path: string) => {
 
         // TODO: check if number or string. If string, make search api call to see if creator exists.
-        ApiClient.get(`star/${path}?department=NONE`).then((response) => {
+        ApiClient.get(`star/${path}?department=NONE&count_department=LIBRARY`).then((response) => {
             if (response.data && response.data.star) {
                 this.star = response.data.star;
                 this.fetchInitialPosts();
@@ -93,7 +93,7 @@ export default class ProfileStore {
         if (this.isAttemptingFollow) {
             return;
         }
-        
+
         this.isAttemptingFollow = true;
 
         const follow = !star.is_favorite;

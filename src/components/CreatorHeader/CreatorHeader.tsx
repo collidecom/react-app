@@ -99,7 +99,7 @@ export const CreatorHeader: React.SFC<Props> = inject('rootStore')(observer((pro
             />
             <CreatorStat
                 type={StatType.MEDIA}
-                count={99}
+                count={star.media_count}
             />
             </div>
         </div>

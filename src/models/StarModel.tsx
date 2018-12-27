@@ -18,5 +18,7 @@ export default interface StarModel {
 
     followers: number;
     is_favorite: boolean;
+
+    media_count: number;
     
 }
