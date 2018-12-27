@@ -15,5 +15,8 @@ export default interface StarModel {
 
     library_purchased: [];
     featured_vod_data: MediaModel[];
+
+    followers: number;
+    is_favorite: boolean;
     
 }

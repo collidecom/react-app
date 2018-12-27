@@ -14,10 +14,14 @@ export default class PostStore {
 
     @action likePost = async (post: PostModel): Promise<any> => {
 
+        if (this.isLiking) {
+            return;
+        }
+        
+        this.isLiking = true;
+
         const postId = post.post_id;
         const like = !post.post_is_liked;
-
-        this.isLiking = true;
 
         let route;
         if (like) {

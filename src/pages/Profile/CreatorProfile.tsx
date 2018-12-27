@@ -8,6 +8,9 @@ import { Post } from '../../components/Post/Post';
 import { Divider, Hidden, Tabs, Tab, Typography } from '@material-ui/core';
 import { CreatorProfileTab } from './CreatorProfileStore';
 import IntroVideoPlayer from '../Player/IntroVideoPlayer';
+import ProfileImage from '../../components/Image/ProfileImage';
+import Link from '../../components/Link/Link';
+import CreatorHeader from '../../components/CreatorHeader/CreatorHeader';
 
 interface Props {
 
@@ -53,6 +56,8 @@ export default class CreatorProfile extends React.Component<Props> {
 
                     <Grid item xs={12} md={9}>
                         <Paper>
+                            <CreatorHeader star={star}/>
+                            <Divider/>
                             <div>
                             <Tabs
                                 color='secondary'

@@ -19,6 +19,9 @@ export default class ProfileStore {
     @observable isFetching = false;
     @observable postsArray: PostModel[] = [];
     @observable selectedTab: CreatorProfileTab = CreatorProfileTab.INFO;
+
+    // prevent multiple follow/unfollow clicks
+    @observable isAttemptingFollow = false;
     
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
@@ -85,4 +88,32 @@ export default class ProfileStore {
         });
     }
 
+    @action follow = (star: StarModel) => {
+
+        if (this.isAttemptingFollow) {
+            return;
+        }
+        
+        this.isAttemptingFollow = true;
+
+        const follow = !star.is_favorite;
+
+        let route;
+        if (follow) {
+            route = 'add';
+        }
+        else {
+            route = 'remove';
+        }
+
+        ApiClient.get(`favorite/${route}/${star.id}`).then(() => {
+            star.is_favorite = follow;
+            // TODO: update follower count?
+            this.isAttemptingFollow = false;
+
+        }).catch((error) => {
+            this.rootStore.errorStore.setErrorMessage(error);
+            this.isAttemptingFollow = false;
+        });
+    }
 }
