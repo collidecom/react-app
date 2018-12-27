@@ -3,6 +3,7 @@ import ApiClient from '../util/ApiClient';
 import { observable, action, computed } from 'mobx';
 import MediaModel from '../models/MediaModel';
 import { PostType } from '../models/PostModel';
+import StarModel from '../models/StarModel';
 
 export enum PlayerType {
     NONE,

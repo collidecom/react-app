@@ -20,7 +20,7 @@ export default class ProfileStore {
     @observable isFetching = false;
     @observable postsArray: PostModel[] = [];
     @observable libraryArray: MediaModel[] = [];
-    @observable selectedTab: CreatorProfileTab = CreatorProfileTab.LIBRARY;
+    @observable selectedTab: CreatorProfileTab = CreatorProfileTab.INFO;
 
     // prevent multiple follow/unfollow clicks
     @observable isAttemptingFollow = false;
