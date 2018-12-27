@@ -32,8 +32,8 @@ code {
 
 .player-wrapper {
 
-  /* width: 100%;
-  height: 60vw; */
+  width: 100%;
+  height: 60vw;
 }
 
 @media (min-width: 768px) {
@@ -42,12 +42,11 @@ code {
     position: fixed;
     right: 12px;
     bottom: 12px;
-/* 
+
     width: 400px;
-    height: 289px; */
+    height: 289px;
   }
 }
-
 .audio-wrapper {
 
   position: fixed;
@@ -112,18 +111,6 @@ code {
 
 .bodyDark {
   background-color: #434a54;
-}
-
-.player-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-}
-
-.react-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
 }
 
 .videoWrapper {

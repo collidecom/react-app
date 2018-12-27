@@ -11,12 +11,11 @@ export default class MediaStore {
         this.rootStore = rootStore;
     }
 
-    @action getMedia(mediaId: number): Promise<any> {
-        return ApiClient.get(`media/${mediaId}`).then((response) => {
+    @action getMedia(mediaId: number) {
+        ApiClient.get(`media/${mediaId}`).then((response) => {
             this.rootStore.playerStore.setMedia(response);
-            Promise.resolve(response);
         }).catch((error) => {
-            Promise.reject(error);
+            this.rootStore.errorStore.setErrorMessage(error);
         });
     }
 }
