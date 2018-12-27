@@ -5,6 +5,12 @@ import ApiClient from '../../util/ApiClient';
 import PostModel, { filterUnprocessedPosts } from '../../models/PostModel';
 import StarModel from '../../models/StarModel';
 
+export enum CreatorProfileTab {
+    INFO,
+    POSTS,
+    LIBRARY,
+    CONNECT
+}
 export default class ProfileStore {
 
     rootStore: RootStore;
@@ -12,9 +18,14 @@ export default class ProfileStore {
     @observable star?: StarModel = undefined;
     @observable isFetching = false;
     @observable postsArray: PostModel[] = [];
+    @observable selectedTab: CreatorProfileTab = CreatorProfileTab.INFO;
     
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
+    }
+
+    @action setSelectedTab = (selectedTab: CreatorProfileTab) => {
+        this.selectedTab = selectedTab;
     }
 
     @action getStar = (path: string) => {

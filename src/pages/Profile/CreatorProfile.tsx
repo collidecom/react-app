@@ -5,7 +5,9 @@ import Grid from '../../components/Grid/Grid';
 import Paper from '../../components/Paper/Paper';
 import PostModel from '../../models/PostModel';
 import { Post } from '../../components/Post/Post';
-import { Divider, Hidden } from '@material-ui/core';
+import { Divider, Hidden, Tabs, Tab, Typography } from '@material-ui/core';
+import { CreatorProfileTab } from './CreatorProfileStore';
+import IntroVideoPlayer from '../Player/IntroVideoPlayer';
 
 interface Props {
 
@@ -51,19 +53,53 @@ export default class CreatorProfile extends React.Component<Props> {
 
                     <Grid item xs={12} md={9}>
                         <Paper>
-                            {creatorProfileStore.postsArray.map((post: PostModel, index) =>
-                            <div key={post.post_id}>
-                                <Post
-                                    post={post}
-                                    star={star}
-                                    access={rootStore.accessStore.accessMedia(star, post, post.post_media_content)}
-                                    onLike={() => postStore.likePost(post)}
-                                />
-                                <Divider/>
+                            <div>
+                            <Tabs
+                                color='secondary'
+                                indicatorColor='primary'
+                                value={creatorProfileStore.selectedTab}
+                                onChange={(e, value) => {
+                                    creatorProfileStore.setSelectedTab(value);
+                                }}
+                                >
+                                <Tab label='Info' />
+                                <Tab label='Posts' />
+                                <Tab label='Library' />
+                            </Tabs>
                             </div>
-
-                            )}
-                            {creatorProfileStore.isFetching && <p>FETCHING MORE...</p>}
+                            <Divider
+                                style={{marginBottom: '32px'}}
+                            />
+                            {creatorProfileStore.selectedTab === CreatorProfileTab.INFO &&
+                                <>
+                                    <Typography variant='h5'>About</Typography>
+                                    <Typography>{star.about}</Typography>
+                                    {star.featured_vod_data &&
+                                        <>
+                                            <IntroVideoPlayer media={star.featured_vod_data[0]}/>
+                                            <Typography variant='h5'>{star.featured_vod_data[0].name}</Typography>
+                                            <Typography>{star.featured_vod_data[0].description}</Typography>
+                                        </>
+                                    }
+                                </>
+                            }
+                            {creatorProfileStore.selectedTab === CreatorProfileTab.POSTS &&
+                                <>
+                                {creatorProfileStore.postsArray.map((post: PostModel, index) =>
+                                    <div key={post.post_id}>
+                                        <Post
+                                            post={post}
+                                            star={star}
+                                            access={rootStore.accessStore.accessMedia(star, post, post.post_media_content)}
+                                            onLike={() => postStore.likePost(post)}
+                                        />
+                                        <Divider/>
+                                    </div>
+                                )}
+                                {creatorProfileStore.isFetching && <p>FETCHING MORE...</p>}
+                                </>
+                            }
+                            
                         </Paper>
                     </Grid>
                     <Hidden mdDown>
