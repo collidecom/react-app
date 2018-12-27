@@ -32,13 +32,19 @@ export default class ProfileStore {
     }
 
     @action getStar = (path: string) => {
-
         // TODO: check if number or string. If string, make search api call to see if creator exists.
-        ApiClient.get(`star/${path}?department=NONE&count_department=LIBRARY`).then((response) => {
-            if (response.data && response.data.star) {
-                this.star = response.data.star;
+
+        const starPromise = ApiClient.get(`star/${path}?department=NONE&count_department=LIBRARY`);
+        const starMePromise = ApiClient.get(`star/${path}/me`);
+
+        Promise.all([starPromise, starMePromise]).then(([starResponse, starMeResponse]) => {
+
+            if (starResponse.data && starResponse.data.star) {
+                const mergedStar = Object.assign(starResponse.data.star, starMeResponse.data.star);
+                this.star = mergedStar;
                 this.fetchInitialPosts();
             }
+
         }).catch((error) => {
             this.rootStore.errorStore.setErrorMessage(error);
         })
