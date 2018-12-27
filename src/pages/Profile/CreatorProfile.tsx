@@ -11,7 +11,17 @@ import IntroVideoPlayer from '../Player/IntroVideoPlayer';
 import ProfileImage from '../../components/Image/ProfileImage';
 import Link from '../../components/Link/Link';
 import CreatorHeader from '../../components/CreatorHeader/CreatorHeader';
+import styled, { charcoalGrayColor } from '../../util/theme';
+import { TabProps } from '@material-ui/core/Tab';
 
+const StyledTab = styled(Tab as React.SFC<TabProps>)`
+    && {
+        font-size: 16px;
+        font-family: MarkOT-Medium;
+        color: ${charcoalGrayColor};
+        text-transform: none;
+    }
+`;
 interface Props {
 
 }
@@ -67,9 +77,9 @@ export default class CreatorProfile extends React.Component<Props> {
                                     creatorProfileStore.setSelectedTab(value);
                                 }}
                                 >
-                                <Tab label='Info' />
-                                <Tab label='Posts' />
-                                <Tab label='Library' />
+                                <StyledTab label='Info' />
+                                <StyledTab label='Posts' />
+                                <StyledTab label='Library' />
                             </Tabs>
                             </div>
                             <Divider
