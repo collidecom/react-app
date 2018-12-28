@@ -1,7 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -9,8 +7,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import { createStyles, withStyles, IconButton } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '../../components/Typography/Typography';
+ import Typography from '../../components/Typography/Typography';
 import { downloadUrlForMedia } from '../../models/MediaModel';
 
 const styles = (theme: any) => createStyles({
