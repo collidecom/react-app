@@ -7,7 +7,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import { inject, observer } from 'mobx-react';
 import RootStore from '../../stores/RootStore';
 import { createStyles, withStyles, IconButton } from '@material-ui/core';
- import Typography from '../../components/Typography/Typography';
+import Typography from '../../components/Typography/Typography';
 import { downloadUrlForMedia } from '../../models/MediaModel';
 
 const styles = (theme: any) => createStyles({
