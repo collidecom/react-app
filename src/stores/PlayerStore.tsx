@@ -8,7 +8,8 @@ import StarModel from '../models/StarModel';
 export enum PlayerType {
     NONE,
     VIDEO,
-    AUDIO
+    AUDIO,
+    IMAGE
 }
 
 export default class PlayerStore {
@@ -37,6 +38,9 @@ export default class PlayerStore {
             switch (this.media.type) {
                 case PostType.VIDEO:
                     playerType = PlayerType.VIDEO;
+                    break;
+                case PostType.IMAGE:
+                    playerType = PlayerType.IMAGE;
                     break;
                 case PostType.AUDIO:
                     playerType = PlayerType.AUDIO;
