@@ -39,7 +39,7 @@ export default class FloatingAudio extends React.Component<Props> {
                         >
                             <FlexContainer>
                                 <img width='30px' height='30px' src={thumbnailForMedia(media)}/>
-                                <div style={{marginLeft: '32px'}}>
+                                <div style={{margin: '0 32px'}}>
                                     <Typography>
                                     {media.star.profile_name}
                                     </Typography>
@@ -47,17 +47,19 @@ export default class FloatingAudio extends React.Component<Props> {
                                     {media.name}
                                     </Typography>
                                 </div>
+
+                                <ReactPlayer
+                                    url={streamableAudioForMedia(media)}
+                                    playing
+                                    controls
+                                    width='100%'
+                                    height='54px'
+                                />
                             </FlexContainer>
+
 
                         </Paper>
 
-                        <ReactPlayer
-                            url={streamableAudioForMedia(media)}
-                            playing
-                            controls
-                            width='100%'
-                            height='54px'
-                        />
                     </div>
                 }
             </div>
