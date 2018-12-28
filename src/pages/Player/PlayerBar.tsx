@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 import { PlayerType } from '../../stores/PlayerStore';
 import FloatingVideo from './FloatingVideo';
 import FloatingAudio from './FloatingAudio';
+import ImageModal from './ImageModal';
 
 interface Props {
 
@@ -36,6 +37,9 @@ export default class PlayerBar extends React.Component<Props> {
                 }
                 {playerStore.playerType === PlayerType.AUDIO &&
                     <FloatingAudio/>
+                }
+                {playerStore.playerType === PlayerType.IMAGE &&
+                    <ImageModal/>
                 }
             </div>
         );
