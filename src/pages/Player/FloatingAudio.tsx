@@ -33,7 +33,10 @@ export default class FloatingAudio extends React.Component<Props> {
             <div>
                 {media &&
                     <div className='audio-wrapper'>
-                        <Paper>
+                        <Paper
+                            square={true}
+                            style={{backgroundColor: 'lightBlue'}}
+                        >
                             <FlexContainer>
                                 <img width='30px' height='30px' src={thumbnailForMedia(media)}/>
                                 <div style={{marginLeft: '32px'}}>
