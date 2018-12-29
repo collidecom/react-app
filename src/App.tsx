@@ -40,10 +40,13 @@ class App extends Component<Props> {
 
   }
 
-  render() {
+  /**
+   * Find a better solution to update app based on login/logout (location.reload technically works). This works for now.
+   */
+  authStateListener(didUpdateAuth: boolean) {
+
     return (
-      <div>
-          <MuiThemeProvider theme={lightTheme}>
+      <MuiThemeProvider theme={lightTheme}>
             <NavBar/>
             <div style={{marginTop: '32px'}}>
               <Switch>
@@ -57,7 +60,20 @@ class App extends Component<Props> {
             <ErrorModal/>
             <PlayerBar/>
             <VideoChatModal/>
-          </MuiThemeProvider>
+        </MuiThemeProvider>
+    );
+    
+  }
+
+  render() {
+
+    const { rootStore } = this.injected;
+    const { authStore } = rootStore;
+    const isLoggedIn = authStore.isLoggedIn;
+
+    return (
+      <div>
+          {this.authStateListener(isLoggedIn)}
       </div>
     );
   }
