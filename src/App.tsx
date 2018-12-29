@@ -17,6 +17,7 @@ import VideoChatModal from './pages/VideoChat/VideoChatModal';
 import Registration from './pages/creator/Registration/Registration';
 import AppCreator from './pages/creator/Registration/AppCreator';
 import CreatorProfile from './pages/Profile/CreatorProfile';
+import 'reflect-metadata'; // https://github.com/typestack/class-transformer
 
 interface Props extends RouteComponentProps<{}> {
 

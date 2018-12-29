@@ -1,7 +1,6 @@
 import SubscriptionModel from "./SubscriptionModel";
 import MediaModel from "./MediaModel";
-
-export default interface StarModel {
+export default class StarModel {
 
     id: number;
     profile_name: string;
@@ -20,5 +19,5 @@ export default interface StarModel {
     is_favorite: boolean;
 
     media_count: number;
-    
+
 }

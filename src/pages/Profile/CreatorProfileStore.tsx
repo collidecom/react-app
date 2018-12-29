@@ -5,6 +5,7 @@ import ApiClient from '../../util/ApiClient';
 import PostModel, { filterUnprocessedPosts } from '../../models/PostModel';
 import StarModel from '../../models/StarModel';
 import MediaModel from '../../models/MediaModel';
+import { plainToClass } from 'class-transformer';
 
 export enum CreatorProfileTab {
     INFO,
@@ -17,6 +18,7 @@ export default class ProfileStore {
     rootStore: RootStore;
     
     @observable star?: StarModel = undefined;
+
     @observable isFetching = false;
     @observable postsArray: PostModel[] = [];
     @observable libraryArray: MediaModel[] = [];
@@ -43,9 +45,11 @@ export default class ProfileStore {
 
             if (starResponse.data && starResponse.data.star) {
                 const mergedStar = Object.assign(starResponse.data.star, starMeResponse.data.star);
-                this.star = mergedStar;
+                const realStar = plainToClass(StarModel, mergedStar as Object);
+                this.star = realStar;
                 this.fetchInitialPosts();
                 this.fetchInitialLibraries();
+
             }
 
         }).catch((error) => {
