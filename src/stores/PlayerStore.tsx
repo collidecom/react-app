@@ -9,7 +9,8 @@ export enum PlayerType {
     NONE,
     VIDEO,
     AUDIO,
-    IMAGE
+    IMAGE,
+    PDF,
 }
 
 export default class PlayerStore {
@@ -44,6 +45,9 @@ export default class PlayerStore {
                     break;
                 case PostType.AUDIO:
                     playerType = PlayerType.AUDIO;
+                    break;
+                case PostType.PDF:
+                    playerType = PlayerType.PDF;
                     break;
                 default:
                     playerType = PlayerType.NONE;

@@ -6,6 +6,7 @@ import { PlayerType } from '../../stores/PlayerStore';
 import FloatingVideo from './FloatingVideo';
 import FloatingAudio from './FloatingAudio';
 import ImageModal from './ImageModal';
+import PDFModal from './PDFModal';
 
 interface Props {
 
@@ -40,6 +41,9 @@ export default class PlayerBar extends React.Component<Props> {
                 }
                 {playerStore.playerType === PlayerType.IMAGE &&
                     <ImageModal/>
+                }
+                {playerStore.playerType === PlayerType.PDF &&
+                    <PDFModal/>
                 }
             </div>
         );
