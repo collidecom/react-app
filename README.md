@@ -1,7 +1,7 @@
 ### Run Project
 1. `npm i` in project root. install dependencies of dependencies if required.
 2. `npm start` to serve project locally.
-3. `npm i -g typescript` to install TypeScript on your machine.
+3. `npm i -g typescript` to install TypeScript on your machine (as opposed to just this project directory).
 
 ### Main Dependencies
 #### Core
