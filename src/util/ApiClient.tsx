@@ -5,7 +5,7 @@ var base64 = require('base-64');
 
 
 const headers = {
-    'Authorization': `Basic ${base64.encode('')}`
+    'Authorization': `Basic ${base64.encode('collide:collide1')}`
 };
 
 var finalURl;
