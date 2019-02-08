@@ -12,8 +12,9 @@ Time spent: 20-30 hours
 
 ### Run Project
 1. `npm i` in project root. install dependencies of dependencies if required.
+* `npm i -g typescript` to install TypeScript on your machine (as opposed to just this project directory).
 2. `npm start` to serve project locally.
-3. `npm i -g typescript` to install TypeScript on your machine (as opposed to just this project directory).
+3. `npm run build` to generate a deployable build.
 
 ### Main Dependencies
 #### Core
