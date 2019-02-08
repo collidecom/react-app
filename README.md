@@ -1,3 +1,15 @@
+### Basic functionality
+Time spent: 20-30 hours
+This repo includes the following:
+* Login functionality
+* Supporter/Creator Dashboard
+* Creator Profile
+* Accept video chats as a Creator (Creator can be on any page of the website)
+* Floating Audio & Video player that lets the user go to different pages but still play media.
+* PDF CORS workaround library, meaning PDFs are viewable.
+* Blurring of Posts (now outdated due to multi-sub implementation)
+
+
 ### Run Project
 1. `npm i` in project root. install dependencies of dependencies if required.
 2. `npm start` to serve project locally.
