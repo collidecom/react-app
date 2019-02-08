@@ -1,6 +1,6 @@
 ### Basic functionality
 Time spent: 20-30 hours  
-This repo includes the following:
+
 * Login functionality
 * Supporter/Creator Dashboard
 * Creator Profile
